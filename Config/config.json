@@ -1,0 +1,18 @@
+{
+	"autoloadFolder": [
+		"Framework",
+		"Controller",
+		"Model",
+		"Framework/Exceptions",
+		"Model/Manager"
+	],
+	"database":  {
+            "name": "Ma base de données",
+            "dbname": "blogmvc",
+            "host": "localhost",
+            "user": "root",
+            "password": ""
+	},
+	"basepath": "/blogmvc"
+	
+}
