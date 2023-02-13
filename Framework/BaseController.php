@@ -9,6 +9,7 @@ class BaseController
 
     public function __construct($httpRequest, $config)
     {
+        session_start();
         $this->httpRequest = $httpRequest;
         $this->config = $config;
         $this->param = array();
@@ -61,4 +62,10 @@ class BaseController
     {
         $this->fileManager->addJs($file);
     }
+
+    public function redirect($url)
+    {
+        header('location: ' . $this->config->basepath . $url);
+    }
+
 }

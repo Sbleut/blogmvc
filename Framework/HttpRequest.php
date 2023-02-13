@@ -38,9 +38,9 @@ class HttpRequest
 		switch ($this->method) {
 			case "GET":
 			case "DELETE":
-				if (preg_match("#" . $this->route . "#", $this->url, $matches)) {
-					for ($i = 1; $i < count($matches) - 1; $i++) {
-						$this->param[] = $matches[$i];
+				foreach ($this->route->getParam() as $param) {
+					if (isset($_GET[$param])) {
+						$this->param[] = $_GET[$param];
 					}
 				}
 			case "POST":
@@ -65,6 +65,7 @@ class HttpRequest
 
 	public function run($config)
 	{
+		$this->bindParam();
 		$this->route->run($this, $config);
 	}
 
