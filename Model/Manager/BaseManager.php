@@ -30,7 +30,6 @@
 		
 		public function create($obj,$param)
 		{
-			
 			$paramNumber = count($param);
 			$valueArray = array_fill(1,$paramNumber,"?");
 			$valueString = implode(", ", $valueArray);
@@ -39,9 +38,9 @@
 			$boundParam = array();
 			foreach($param as $paramName)
 			{
-				$boundParam[$paramName] = $obj->$paramName;	
+				$boundParam[] = $obj->{'get'. ucfirst($paramName)}();	
 			}
-			$req->execute($boundParam);
+			return $req->execute($boundParam);
 		}
 		
 		public function update($obj,$param)
@@ -74,5 +73,21 @@
 			{
 				throw new PropertyNotFoundException($this->object,"id");	
 			}
+		}
+
+		public function setProperties($data) {
+			foreach ($data as $key => $value) {
+				if (property_exists($this, $key)) {
+					$this->$key = $value;
+				}
+			}
+		}
+
+		function getProperties($object) {
+			$properties = [];
+			foreach ($object as $property => $value) {
+				$properties[$property] = $value;
+			}
+			return $properties;
 		}
 	}

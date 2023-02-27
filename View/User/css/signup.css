@@ -1,0 +1,9 @@
+body{
+    background-color: bisque;
+}
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}

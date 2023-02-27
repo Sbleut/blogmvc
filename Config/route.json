@@ -33,6 +33,36 @@
 	"title": "Authentification"
 },
 {
+	"path" : "/Signup",
+	"controller" : "User",
+	"action" : "Signup",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Inscription"
+},
+{
+	"path" : "/Signup",
+	"controller" : "User",
+	"action" : "Register",
+	"method" : "POST",
+	"param" : [
+		"login",
+		"password",
+		"check-password",
+		"name",
+		"last-name",		
+		"catch-phrase",
+		"profil-pic"
+	],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Inscription"
+},
+{
 	"path" : "/Error",
 	"controller" : "Error",
 	"action" : "Show",
@@ -40,4 +70,16 @@
 	"param" : [],
 	"manager": [],
 	"title": "Erreur"
+},
+{
+	"path" : "/Admin",
+	"controller" : "Admin",
+	"action" : "Dashboard",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Administration",
+	"auth": "ADMIN"
 }]
