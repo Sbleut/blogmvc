@@ -33,7 +33,9 @@ class BaseController
             ob_start();
             extract($this->param);
             include("View/" . $this->httpRequest->getRoute()->getController() . "/" . $filename . ".php");
+            
             $content = ob_get_clean();
+            
             $title = $this->title;
             $jsContent = $this->fileManager->generateJs($filename);
             $cssContent = $this->fileManager->generateCss($filename);

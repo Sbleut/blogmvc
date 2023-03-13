@@ -26,5 +26,6 @@
 			$req->setFetchMode(PDO::FETCH_ASSOC);
 			return $req->fetchAll();
 		}
+		
 
     }

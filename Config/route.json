@@ -82,4 +82,16 @@
 	],
 	"title": "Administration",
 	"auth": "ROLE_ADMIN"
-}]
+},
+{
+	"path" : "/Articles",
+	"controller" : "Article",
+	"action" : "ArticlesList",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"ArticleManager"
+	],
+	"title": "Liste des articles"
+}
+]
