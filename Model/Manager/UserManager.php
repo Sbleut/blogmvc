@@ -14,8 +14,17 @@
 			//$aFetch = parent::getProperties($req->fetch(PDO::FETCH_OBJ));
 			//extract($aFetch);
 			//$user = new User ($id, $mail, $password, $name, $last_name, $pic, $catch_phrase);
-			var_dump($req->fetch());
 			return $req->fetch();			
+		}
+
+		public function getRole($id)
+		{
+			$req = $this->bdd->prepare("SELECT role.* FROM user_has_role
+			INNER JOIN role 
+			ON role.id = user_has_role.roleid WHERE userid=?");
+			$req->execute(array($id));
+			$req->setFetchMode(PDO::FETCH_ASSOC);
+			return $req->fetchAll();
 		}
 
     }

@@ -68,7 +68,7 @@ class HttpRequest
 		$this->bindParam();
 		$this->route->run($this, $config);
 	}
-
+	
 	public function addParam($value)
 	{
 		$this->param[] = $value;

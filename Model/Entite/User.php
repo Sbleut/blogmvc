@@ -29,7 +29,7 @@ class User
         {
             $result = array_filter($this->listRole,function($role) use($auth)
             {
-                return $role->name == $auth;
+                return $role['name'] == $auth;
             });
             if(count($result) == 1)
             {
@@ -43,11 +43,6 @@ class User
 	{
 		return $this->id;
 	}
-
-	// public function getRole()
-	// {
-	// 	return $this->role;
-	// }
 
 	public function getMail()
 	{
@@ -92,6 +87,16 @@ class User
 	public function getPic()
 	{
 		return $this->pic;
+	}
+
+	public function getListRole()
+	{
+		return $this->listRole;
+	}
+
+	public function setListRole($roles)
+	{
+		$this->listRole = $roles;
 	}
 
 	public function getCatch_phrase()

@@ -20,7 +20,6 @@
 		$router = new Router();
 		$httpRequest->setRoute($router->findRoute($httpRequest, $config->basepath));
 		$httpRequest->run($config);
-
 	}
 	catch(Exception $e)
 	{

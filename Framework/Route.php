@@ -60,12 +60,7 @@ class Route
 	public function run($httpRequest, $config)
 	{
 		$controller = null;
-		if ($this->auth != null) {
-			if (!$_SESSION['user']->checkRole($this->auth)) 
-			{
-				throw new UnauthorizedAccess();
-			}
-		}
+		
 
 		$controllerName = $this->controller . "Controller";
 		if (class_exists($controllerName)) {
@@ -78,6 +73,14 @@ class Route
 			}
 		} else {
 			throw new ControllerNotFoundException();
+		}
+
+		if ($this->auth != null) {
+			var_dump($_SESSION['user']->checkRole($this->auth));
+			if (!$_SESSION['user']->checkRole($this->auth)) 
+			{
+				throw new UnauthorizedAccess();
+			}
 		}
 	}
 }

@@ -16,13 +16,15 @@ class UserController extends BaseController
     {
         if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
             $user = $this->UserManager->getByMail($login);
-            
-            if (!$user) {
+            var_dump($user);
+            if (empty($user)) {
                 throw new WrongLoginException();
                 exit;
             }
+            // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
                 $_SESSION['user'] = $user;
+                $_SESSION['user']->setListRole($this->UserManager->getRole($user->getId()));
                 $this->redirect('/');
             }
         } else {
@@ -86,3 +88,4 @@ class UserController extends BaseController
         $this->redirect('');
     }
 }
+?>

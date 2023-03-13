@@ -81,5 +81,5 @@
 		"UserManager"
 	],
 	"title": "Administration",
-	"auth": "ADMIN"
+	"auth": "ROLE_ADMIN"
 }]
