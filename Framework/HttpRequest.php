@@ -53,6 +53,17 @@ class HttpRequest
 		}
 	}
 
+	private function bindRouteParam($config)
+    {
+		$url = str_replace($config->basepath, "", $this->getUrl());
+        $routeParam = $this->route->getParam();
+        if (preg_match('#^' . $this->route->getPath() . '\/?$#', $url, $listRouteParam) > 0) {
+            for ($i = 0; $i <= count($listRouteParam) - 2; $i++) {
+                $this->param[$routeParam[$i]] = $listRouteParam[$i + 1];
+            }
+        }		
+    }
+
 	public function getRoute()
 	{
 		return $this->route;
@@ -66,6 +77,7 @@ class HttpRequest
 	public function run($config)
 	{
 		$this->bindParam();
+		$this->bindRouteParam($config);
 		$this->route->run($this, $config);
 	}
 	

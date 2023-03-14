@@ -38,14 +38,14 @@ class Article
 		$this->title = $title;
 	}
 
-    public function getCaption()
+    public function getChapo()
 	{
-		return $this->caption;
+		return $this->chapo;
 	}
 
-    public function setCaption($caption)
+    public function setChapo($chapo)
 	{
-		$this->caption = $caption;
+		$this->chapo = $chapo;
 	}
 
     public function getContent()
@@ -58,14 +58,24 @@ class Article
 		$this->content = $content;
 	}
 
-    public function getAuthorId()
+    public function getPost_author()
 	{
-		return $this->author;
+		return $this->post_author;
 	}
 
-    public function setAuthor($author)
+    public function setPost_author($post_author)
 	{
-		$this->author = $author;
+		$this->post_author = $post_author;
+	}
+
+    public function getDate()
+	{
+		return $this->date;
+	}
+
+    public function setDate($date)
+	{
+		$this->date = $date;
 	}
 
 }
