@@ -8,7 +8,7 @@
 				<h5 class="card-title"><?= $article->title; ?></h5>
 				<h6 class="card-subtitle mb-2 text-muted"><?= $article->date; ?></h6>
 				<p class="card-text"><?= $article->chapo; ?></p>
-				<a href="Article/<?= $article->id; ?>"><?= $article->title; ?></a>
+				<a href="<?=$config->basepath?>/Article/<?= $article->id; ?>"><?= $article->title; ?></a>
 				<p><?= $article->post_author; ?></p>
 
 			</div>

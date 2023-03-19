@@ -17,15 +17,31 @@ class ArticleController extends BaseController
         $this->View('create-article');
     }
 
+    public function ArticleUpdateForm()
+    {
+        $this->View("update-article");
+    }
+
     public function ArticleDetail($id)
     {
         $article = $this->ArticleManager->getById($id);
 
         $author = $this->ArticleManager->getAuthor($article->post_author);
-        $article->setPost_author($author->getName() . ' ' . $author->getLast_name());
+        $article->setPost_author($author);
 
         $this->addParam("article", $article);
         $this->ArticlePage();
+    }
+    
+    public function ArticleDetailUpdate($id)
+    {
+        $article = $this->ArticleManager->getById($id);
+
+        $author = $this->ArticleManager->getAuthor($article->post_author);
+        $article->setPost_author($author);
+
+        $this->addParam("article", $article);
+        $this->ArticleUpdateForm();
     }
 
     public function ArticlesList($page = 1)
@@ -68,7 +84,20 @@ class ArticleController extends BaseController
         $this->redirect('/Article/' . $article->id);
     }
 
-    public function ArticleUpdate($title, $chapo, $content)
+    public function ArticleUpdate($id, $title, $chapo, $content)
     {
+        $article = $this->ArticleManager->getById($id);
+
+        $article->setTitle($title);
+        $article->setChapo($chapo);
+        $article->setContent($content);
+        $result = $this->ArticleManager->update($article, ['title', 'chapo', 'content', 'post_author', 'date']);
+        if (!$result) {
+            throw new BDDCreationException();
+        }
+        $article = $this->ArticleManager->getByDate($article->date);
+
+        $this->redirect('/Article/' . $article->id);
+
     }
 }

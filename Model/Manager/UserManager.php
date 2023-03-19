@@ -11,9 +11,14 @@
 			$req = $this->bdd->prepare("SELECT * FROM user WHERE mail=?");
 			$req->execute(array($mail));
 			$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
-			//$aFetch = parent::getProperties($req->fetch(PDO::FETCH_OBJ));
-			//extract($aFetch);
-			//$user = new User ($id, $mail, $password, $name, $last_name, $pic, $catch_phrase);
+			return $req->fetch();			
+		}
+
+		public function getById($id)
+		{
+			$req = $this->bdd->prepare("SELECT * FROM user WHERE mail=id");
+			$req->execute(array($id));
+			$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
 			return $req->fetch();			
 		}
 

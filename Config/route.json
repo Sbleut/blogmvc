@@ -137,11 +137,25 @@
 	"auth":"ROLE_ADMIN"
 },
 {
-	"path" : "/ArticleCreate",
+	"path" : "/ArticleUpdate/([0-9]*)",
 	"controller" : "Article",
-	"action" : "ArticleCreate",
+	"action" : "ArticleDetailUpdate",
+	"method" : "GET",
+	"param" : [
+		"id"
+	],
+	"manager": [
+		"ArticleManager"
+	],
+	"title": "Modification de l'article"
+},
+{
+	"path" : "/ArticleUpdate",
+	"controller" : "Article",
+	"action" : "ArticleUpdate",
 	"method" : "POST",
 	"param" : [
+		"id",
 		"title",
 		"chapo",
 		"content"
@@ -149,6 +163,6 @@
 	"manager": [
 		"ArticleManager"
 	],
-	"title": "Enregistrement de votre article"
+	"title": "Modification de l'article"
 }
 ]

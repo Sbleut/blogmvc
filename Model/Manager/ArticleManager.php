@@ -32,6 +32,10 @@ class ArticleManager extends BaseManager
 
     public function getByAuthor($author)
     {
+        $req = $this->bdd->prepare("SELECT * FROM user WHERE id=?");
+        $req->execute(array($id));
+        $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "User");
+        return $req->fetch();
     }
 
     public function getByDate($date)
