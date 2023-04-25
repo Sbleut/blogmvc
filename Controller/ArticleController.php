@@ -24,11 +24,11 @@ class ArticleController extends BaseController
 
     public function ArticleDetail($id)
     {
-        $article = $this->ArticleManager->getById($id);
-
-        $author = $this->ArticleManager->getAuthor($article->post_author);
-        $article->setPost_author($author);
-
+        $article = $this->ArticleManager->getByIdWithData($id);
+        
+        $article->commentList = array_filter($article->commentList, function($comment){
+            return $comment->getValidation() == '1';
+        });
         $this->addParam("article", $article);
         $this->ArticlePage();
     }
@@ -68,6 +68,14 @@ class ArticleController extends BaseController
         $this->Magazine();
     }
 
+    /**
+     * Article Create is function to create an article from 3 parameters. It pushs data in Bdd using Article Manager. If there is a Bdd Error throw the Bdd error. Eventually redirect to article's page.
+     *
+     * @param [string] $title
+     * @param [string] $chapo
+     * @param [string] $content
+     * @return void
+     */
     public function ArticleCreate($title, $chapo, $content)
     {
         $article = new Article();
@@ -99,5 +107,18 @@ class ArticleController extends BaseController
 
         $this->redirect('/Article/' . $article->id);
 
+    }
+
+    /**
+     * Article Create is function to create an article from 3 parameters. It pushs data in Bdd using Article Manager. If there is a Bdd Error throw the Bdd error. Eventually redirect to article's page.
+     *
+     * @param [integer] $id
+     * @return void
+     */
+    public function getArtcilesByAuthor($id) 
+    {
+        
+        $articlesList = $this->ArticleManager->getByAuthor($id);
+        return $articlesList;
     }
 }

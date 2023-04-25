@@ -76,7 +76,6 @@ class Route
 		}
 
 		if ($this->auth != null) {
-			
 			if (!$_SESSION['user']->checkRole($this->auth)) 
 			{
 				throw new UnauthorizedAccess();

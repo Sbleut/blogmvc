@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
 
+    <!-- link tiny MCE : Text enhanced text editor-->
+
     <title><?= $title; ?></title>
     <?= $jsContent; ?>
     <?= $cssContent; ?>
@@ -16,25 +18,46 @@
 <body class="container">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/blogmvc/">Mon Blog</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=$config->basepath?>/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=$config->basepath?>/Articles/1">Articles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">À Propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/blogmvc/">Mon Blog</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $config->basepath ?>/">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $config->basepath ?>/Articles/1">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">À Propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <?php
+                    if (empty($_SESSION)) {
+                        echo '<button class="btn btn-primary"><a class="text-light" href="' . $config->basepath . '/Login">Se connecter</a></button>';
+                    }
+                    if (!empty($_SESSION)) {
+
+                        echo '
+                        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="' . $config->basepath . '/Admin">Mes articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="' . $config->basepath . '/Profil">Mon profil</a>
+                        </li>
+                        </ul>
+                        <button class="btn btn-primary"><a class="text-light" href="' . $config->basepath . '/Logout">Se déconnecter</a></button>';
+                    }
+                    ?>
+
+                </div>
             </div>
         </nav>
 

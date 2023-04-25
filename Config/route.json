@@ -19,6 +19,17 @@
 	"title": "Authentification"
 },
 {
+	"path" : "/Logout",
+	"controller" : "User",
+	"action" : "Logout",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Logout"
+},
+{
 	"path" : "/Login",
 	"controller" : "User",
 	"action" : "Authenticate",
@@ -78,9 +89,24 @@
 	"method" : "GET",
 	"param" : [],
 	"manager": [
-		"UserManager"
+		"ArticleManager"
 	],
 	"title": "Administration",
+	"auth": "ROLE_ADMIN"
+},
+{
+	"path" : "/Article/([0-9]*)/Comment/([0-9]*)/Valid",
+	"controller" : "Admin",
+	"action" : "ValidateComment",
+	"method" : "GET",
+	"param" : [
+		"article_id",
+		"comment_id"		
+	],
+	"manager": [
+		"CommentManager"
+	],
+	"title": "Valider le commentaire",
 	"auth": "ROLE_ADMIN"
 },
 {
@@ -164,5 +190,46 @@
 		"ArticleManager"
 	],
 	"title": "Modification de l'article"
+},
+{
+	"path" : "/Article",
+	"controller" : "Article",
+	"action" : "ArticleUpdate",
+	"method" : "POST",
+	"param" : [
+		"id",
+		"title",
+		"chapo",
+		"content"
+	],
+	"manager": [
+		"ArticleManager"
+	],
+	"title": "Modification de l'article"
+},
+{
+	"path" : "/Article/CommentCreate",
+	"controller" : "Comment",
+	"action" : "CommentCreate",
+	"method" : "POST",
+	"param" : [
+		"article",
+		"content"
+	],
+	"manager": [
+		"CommentManager"
+	],
+	"title": "Création d'un commentaire"
+},
+{
+	"path" : "/Profil",
+	"controller" : "User",
+	"action" : "UserRetrieve",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Modification profil"
 }
 ]

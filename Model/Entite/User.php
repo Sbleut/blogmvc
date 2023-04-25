@@ -29,7 +29,7 @@ class User
         {
             $result = array_filter($this->listRole,function($role) use($auth)
             {
-                return $role['name'] == $auth;
+                return $role == $auth;
             });
             if(count($result) == 1)
             {

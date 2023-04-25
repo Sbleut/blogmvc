@@ -12,11 +12,21 @@ class UserController extends BaseController
         $this->View("signup");
     }
 
+    public function Logout()
+    {
+        session_destroy();
+        $this->view("login");
+    }
+
+    public function UserRetrieve()
+    {
+        $this->view("profil");
+    }
+
     public function Authenticate($login, $password)
     {
         if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
             $user = $this->UserManager->getByMail($login);
-            var_dump($user);
             if (empty($user)) {
                 throw new WrongLoginException();
                 exit;
@@ -24,7 +34,11 @@ class UserController extends BaseController
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
                 $_SESSION['user'] = $user;
-                $_SESSION['user']->setListRole($this->UserManager->getRole($user->getId()));
+                foreach ($this->UserManager->getRole($user->getId()) as $role)
+                {                    
+                    $listRole[] = $role['name'];
+                }
+                $_SESSION['user']->setListRole($listRole);
                 $this->redirect('/');
             }
         } else {

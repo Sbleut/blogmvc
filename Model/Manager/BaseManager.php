@@ -34,8 +34,10 @@ class BaseManager
 		$valueArray = array_fill(1, $paramNumber, "?");
 		$valueString = implode(", ", $valueArray);
 		$sql = "INSERT INTO " . $this->table . "(" . implode(", ", $param) . ") VALUES(" . $valueString . ")";
+		
 		$req = $this->bdd->prepare($sql);
 		$boundParam = array();
+		
 		foreach ($param as $paramName) {
 			$boundParam[] = $obj->{'get' . ucfirst($paramName)}();
 		}
@@ -56,7 +58,6 @@ class BaseManager
 		}
 
 		$sql = $sql . " WHERE id =" . $obj->getId() . ";";
-		var_dump($sql);
 		$req = $this->bdd->prepare($sql);
 
 		$boundParam = array();
