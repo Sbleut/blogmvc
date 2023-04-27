@@ -1,4 +1,9 @@
 <?php
+/**
+ * The CommentController class is responsible for handling comment-related requests from the user interface. 
+ *
+ * @extends BaseController
+ */
 class CommentController extends BaseController
 {
     /**

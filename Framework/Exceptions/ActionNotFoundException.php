@@ -1,9 +1,18 @@
-<?php 
+<?php
 
+/**
+
+ * Custom exception class thrown when a requested action is not found
+ * @package CustomException
+ */
 class ActionNotFoundException extends Exception
 {
-    public function __construct($message = "No action has been found")
-		{
-			parent::__construct($message, "0006");
-		}
+	/**
+	 * Constructor method for the exception
+	 * @param string $message The exception message
+	 */
+	public function __construct($message = "No action has been found", $code = "0006")
+	{
+		parent::__construct($message, $code);
+	}
 }

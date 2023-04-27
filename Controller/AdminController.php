@@ -1,12 +1,12 @@
 <?php
 
-// 1) List of Admin Function()
-
-// 2) Rights verification
-
 class AdminController extends BaseController
 {
-
+    /**
+     * Dashboard : Prepare data and display Administration dashboard view.
+     *
+     * @return void
+     */
     public function Dashboard()
     {
         $articles = $this->ArticleManager->getArticlesByAuthorWithData($_SESSION['user']->getId());        
@@ -14,6 +14,13 @@ class AdminController extends BaseController
         $this->view('admin');
     }
 
+    /**
+     * ValidateComment : Validate a given comment from a given article.
+     *
+     * @param [integer] $article_id
+     * @param [integer] $comment_id
+     * @return void
+     */
     public function ValidateComment($article_id, $comment_id)
     {
         $this->CommentManager->setCommentValidation($comment_id);

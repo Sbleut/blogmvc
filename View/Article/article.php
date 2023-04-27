@@ -5,7 +5,7 @@
     <h4 class="mt-3"><?= $article->chapo ?></h4>
     <p class="text-muted mt-3">Ecrit par <?= $article->author ?> le <?= $article->date ?></p>
     <hr>
-    <div class="mt-3"><?= $article->content ?></div>
+    <div class="mt-3"><?= htmlspecialchars($article->content, ENT_QUOTES, 'UTF-8') ?></div>
     <?php
     if (!empty($_SESSION) && in_array("ROLE_ADMIN", $_SESSION['user']->getListRole()) && $_SESSION['user']->getId() == $article->post_author) {
         echo ('<button class="btn btn-primary"><a class="text-reset" href="' . $config->basepath . '/ArticleUpdate/' . $article->id . '">Modifier</a></button>');

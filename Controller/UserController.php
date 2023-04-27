@@ -2,27 +2,63 @@
 
 class UserController extends BaseController
 {
+    /**
+     * Login function : Displays the login page
+     *
+     * @return void
+     */
     public function Login()
     {
         $this->View("login");
     }
 
+    /**
+     * Signup function : Displays the signup page
+     *
+     * @return void
+     */
     public function Signup()
     {
         $this->View("signup");
     }
 
+    /**
+     * Logout function : Destroys the session and displays the login page.
+     *
+     * @return void
+     */
     public function Logout()
     {
         session_destroy();
         $this->view("login");
     }
 
+    /**
+     * UserRetrieve function : Displays the Profil page
+     *
+     * @return void
+     */
     public function UserRetrieve()
     {
         $this->view("profil");
     }
 
+    /**
+     * Authenticate function takes a login and a password and tries to authenticate the user.
+     * If the login is an email, it gets the user from the database using the UserManager, 
+     * then checks if the provided password matches the user's password.
+     * If the authentication is successful, the user is stored in the session and redirected to the home page.
+     * If the login is not an email, throws a NotAnEmail exception.
+     * If the user does not exist in the database, throws a WrongLoginException.
+     *
+     * @param [string] $login
+     * @param [string] $password
+     * 
+     * @throws WrongLoginException
+     * @throws NotAnEmail
+     * 
+     * @return void
+     */
     public function Authenticate($login, $password)
     {
         if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
@@ -34,8 +70,7 @@ class UserController extends BaseController
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
                 $_SESSION['user'] = $user;
-                foreach ($this->UserManager->getRole($user->getId()) as $role)
-                {                    
+                foreach ($this->UserManager->getRole($user->getId()) as $role) {
                     $listRole[] = $role['name'];
                 }
                 $_SESSION['user']->setListRole($listRole);
@@ -46,6 +81,22 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * Register is a function to handle user registration with given parameters.
+     *
+     * @param [string] $login User email as login
+     * @param [string] $password User password
+     * @param [string] $checkPassword Password confirmation
+     * @param [string] $name User first name
+     * @param [string] $lastName User last name
+     * @param [string] $catchPhrase User catch phrase
+     *
+     * @throws WrongTypeOfFile Exception if file type is not .png or .jpeg
+     * @throws PictureTooBig Exception if file size is too big
+     * @throws BDDCreationException Exception if database creation fails
+     *
+     * @return void
+     */
     public function Register($login, $password, $checkPasword, $name, $lastName, $catchPhrase)
     {
         //Check if we can user an object as a parameter 
@@ -54,52 +105,45 @@ class UserController extends BaseController
         $bMailPassword = false;
         // Password == checkpaswword
         // login == email
-        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password == $checkPasword)
-        {   
+        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password == $checkPasword) {
             $bMailPassword = true;
         }
-
-        // password requirements
 
         // preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $password);
 
         // PictureManagement
         $pic = $_FILES['profil-pic'];
         $bPicOk = true;
-        // pic == jpeg or png
-        if($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg')
-        {
+        if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
             $bPicOk = false;
             throw new WrongTypeOfFile();
         }
-         // Picture max weight => Redirect Error
-        if($pic['size'] > 500000)
-        {
+        // Picture max weight => Redirect Error
+        if ($pic['size'] > 500000) {
             $bPicOk = false;
             throw new PictureTooBig();
-        }     
+        }
+
         // Path to files New Folder 
         $uploadDir = 'uploads/';
         $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
-        $newFileName = uniqid().'.'.$extension;
+        $newFileName = uniqid() . '.' . $extension;
         $destination = $uploadDir . $newFileName;
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
         } else {
             throw new Exception('Failed to upload file');
         }
-        
+
         // Preparing Array to use BaseManager::create($obj, $param)
         // Calling UserManager::createUser()
         $user = new User();
         $user->populate($id = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
         $result = $this->UserManager->create($user, ['mail', 'password', 'name', 'last_name', 'pic', 'catch_phrase']);
-        if(!$result)
-        {
+        if (!$result) {
             throw new BDDCreationException();
         }
         // Redirect Profile Page.
         $this->redirect('');
     }
 }
-?>
