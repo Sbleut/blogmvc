@@ -19,6 +19,7 @@ class UserController extends BaseController
      */
     public function Signup()
     {
+        
         $this->View("signup");
     }
 
@@ -29,7 +30,8 @@ class UserController extends BaseController
      */
     public function Logout()
     {
-        session_destroy();
+        $this->session->delete('user');
+        $this->session->destroy();
         $this->view("login");
     }
 
@@ -40,6 +42,9 @@ class UserController extends BaseController
      */
     public function UserRetrieve()
     {
+        $this->checkLoggedIn();
+        $user=$this->session->get('user');
+        $this->addParam("user", $user);
         $this->view("profil");
     }
 
@@ -69,14 +74,15 @@ class UserController extends BaseController
             }
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
-                $_SESSION['user'] = $user;
                 foreach ($this->UserManager->getRole($user->getId()) as $role) {
                     $listRole[] = $role['name'];
                 }
-                $_SESSION['user']->setListRole($listRole);
+                $user->setListRole($listRole);                
+                $this->session->set('user', $user);
                 $this->redirect('/');
             }
-        } else {
+        }
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
             throw new NotAnEmail();
         }
     }
@@ -112,7 +118,7 @@ class UserController extends BaseController
         // preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $password);
 
         // PictureManagement
-        $pic = $_FILES['profil-pic'];
+        $pic = $_FILES['profil-pic'] ?? null;
         $bPicOk = true;
         if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
             $bPicOk = false;
@@ -131,7 +137,8 @@ class UserController extends BaseController
         $destination = $uploadDir . $newFileName;
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
-        } else {
+        }
+        if (!move_uploaded_file($pic['tmp_name'], $destination)) {
             throw new Exception('Failed to upload file');
         }
 

@@ -12,6 +12,12 @@ class HttpRequest
 	private $method;
 	private $param;
 	private $route;
+	/**
+	 * The session object that is used to manage sessions.
+	 * @var object Session
+	 */
+	private $session;
+
 
 	/**
 	 * Constructs an instance of the HttpRequest class.
@@ -20,9 +26,10 @@ class HttpRequest
 	 */
 	public function __construct($url = null, $method = null)
 	{
-		$this->url = (is_null($url)) ? $_SERVER['REQUEST_URI'] : $url;
-		$this->method = (is_null($method)) ? $_SERVER['REQUEST_METHOD'] : $method;
+		$this->url = (!empty($url)) ? $url : $_SERVER['REQUEST_URI'];
+		$this->method = (!empty($method)) ? $method : $_SERVER['REQUEST_METHOD'];
 		$this->param = array();
+		$this->session = new Session();
 	}
 
 	/**
@@ -112,6 +119,17 @@ class HttpRequest
 	}
 
 	/**
+	 * Retrieves the current session object.
+	 *
+	 * @return Session The current session object.
+	 */
+	public function getSession()
+	{
+		return $this->session;
+	}
+
+
+	/**
 	 * Returns the parameters of the request
 	 * @return array - The parameters of the request
 	 */
@@ -128,7 +146,7 @@ class HttpRequest
 	{
 		$this->bindParam();
 		$this->bindRouteParam($config);
-		$this->route->run($this, $config);
+		$this->route->run($this, $config, $this->session);
 	}
 
 	/**

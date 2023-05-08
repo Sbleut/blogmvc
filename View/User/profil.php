@@ -1,45 +1,44 @@
-<div class="container">
-  <form class="form-signin ">
-    <h2 class="form-signin-heading">Profil utilisateur</h2>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email" value="<?= $_SESSION['user']->getEmail() ?>" required autofocus>
-    <label for="inputFirstName" class="sr-only">Prénom</label>
-    <input type="text" id="inputFirstName" class="form-control" placeholder="Prénom" required>
-    <label for="inputLastName" class="sr-only">Nom</label>
-    <input type="text" id="inputLastName" class="form-control" placeholder="Nom" required>
-    <label for="inputCatchPhrase" class="sr-only">Phrase d'accroche</label>
-    <input type="text" id="inputCatchPhrase" class="form-control" placeholder="Phrase d'accroche" required>
-    <label for="inputPassword" class="sr-only">Mot de passe</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-    <label for="inputConfirmPassword" class="sr-only">Confirmation du mot de passe</label>
-    <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirmation du mot de passe" required>
-
-    <div class="form-group">
-        <label for="profil-pic">Photo de profil</label>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="profil-pic" name="profil-pic" accept="image/png, image/jpeg">
-            <label class="custom-file-label" for="profil-pic">Choisir un fichier</label>
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <img src="<?= htmlspecialchars($user->getPic(), ENT_QUOTES, 'UTF-8' ); ?>"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px;">
+              <button type="button" class="btn btn-outline-primary" data-mdb-ripple-color="white"><a class="" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/">Edit profile</a>
+              </button>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5><?= htmlspecialchars($user->getName(), ENT_QUOTES, 'UTF-8' ); ?> <?= htmlspecialchars($user->getLast_name(), ENT_QUOTES, 'UTF-8' ); ?></h5>
+              <p><?= htmlspecialchars($user->getMail(), ENT_QUOTES, 'UTF-8' ); ?></p>
+            </div>
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div>
+                <p class="mb-1 h5">253</p>
+                <p class="small text-muted mb-0">Articles</p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">1026</p>
+                <p class="small text-muted mb-0">Comments</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1">About</p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1"><?= htmlspecialchars($user->getCatch_phrase(), ENT_QUOTES, 'UTF-8' ); ?></p>
+              </div>
+            </div>
+            
+          </div>
         </div>
+      </div>
     </div>
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Enregistrer</button>
-    <button class="btn btn-lg btn-secondary btn-block" id="edit-profile-btn">Modifier</button>
-  </form>
-</div>
-
-
-<script>
-    const editBtn = document.querySelector('.edit-btn');
-    const submitBtn = document.querySelector('.submit-btn');
-
-    function toggleFormEditable() {
-        const form = document.querySelector('.sign-up-form');
-        const inputs = form.querySelectorAll('input[type="text"], input[type="password"]');
-        inputs.forEach(input => {
-            input.readOnly = !input.readOnly;
-        });
-        submitBtn.disabled = !submitBtn.disabled;
-    }
-
-    editBtn.addEventListener('click', toggleFormEditable);
-</script>
+  </div>
+</section>

@@ -18,6 +18,7 @@
 	{
 		$httpRequest = new HttpRequest();
 		$router = new Router();
+		session_start();
 		$httpRequest->setRoute($router->findRoute($httpRequest, $config->basepath));
 		$httpRequest->run($config);
 	}

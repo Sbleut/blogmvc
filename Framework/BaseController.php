@@ -21,10 +21,15 @@ class BaseController
      * @var object
      */
     private $httpRequest;
+    /**
+     * The session object that is used to manage sessions.
+     * @var object
+     */
+    protected $session;
     /** 
      * An associative array of parameters that will be used to render views.
      * @var array
-     */
+     */    
     private $param;
     /** 
      * The configuration object that stores various settings such as database credentials.
@@ -40,7 +45,7 @@ class BaseController
      * The title of the current page that will be used in the layout.
      * @var string
      */
-    protected $title;
+    protected $title; 
 
     /**
 
@@ -50,8 +55,8 @@ class BaseController
      */
     public function __construct($httpRequest, $config)
     {
-        session_start();
         $this->httpRequest = $httpRequest;
+        $this->session = $httpRequest->getSession();
         $this->config = $config;
         $this->param = array();
         $this->addParam("httprequest", $this->httpRequest);
@@ -151,5 +156,21 @@ class BaseController
     public function redirect($url)
     {
         header('location: ' . $this->config->basepath . $url);
+    }
+
+    public function checkLoggedIn(): bool
+    {
+        if ($this->session->get('user')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin(): bool
+    {
+        if($this->checkLoggedIn() && in_array('ROLE_ADMIN', $this->session->get('user')->getListRole())){
+            return true;
+        }
+        return false;
     }
 }

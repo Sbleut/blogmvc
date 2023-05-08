@@ -51,6 +51,10 @@ class ArticleController extends BaseController
     public function ArticleDetail($id)
     {
         $article = $this->ArticleManager->getByIdWithData($id);
+        
+        if ($article->post_author == $this->session->get('user')->getId()){
+            $this->addParam("authorisuser", true);        
+        }
 
         $article->commentList = array_filter($article->commentList, function ($comment) {
             return $comment->getValidation() == '1';
@@ -71,7 +75,7 @@ class ArticleController extends BaseController
 
         $author = $this->ArticleManager->getAuthor($article->post_author);
         $article->setPost_author($author);
-
+        
         $this->addParam("article", $article);
         $this->ArticleUpdateForm();
     }
@@ -119,7 +123,7 @@ class ArticleController extends BaseController
         $article = new Article();
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');
-        $author = $_SESSION['user']->getId();
+        $author = $this->session->getSession('user')->getId();
         $article->populate($id = null, $title, $chapo, $content, $author, $date);
         $result = $this->ArticleManager->create($article, ['title', 'chapo', 'content', 'post_author', 'date']);
         if (!$result) {

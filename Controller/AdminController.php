@@ -9,7 +9,7 @@ class AdminController extends BaseController
      */
     public function Dashboard()
     {
-        $articles = $this->ArticleManager->getArticlesByAuthorWithData($_SESSION['user']->getId());        
+        $articles = $this->ArticleManager->getArticlesByAuthorWithData($this->session->get('user')->getId());        
         $this->addParam("articles", $articles);
         $this->view('admin');
     }
@@ -26,12 +26,6 @@ class AdminController extends BaseController
         $this->CommentManager->setCommentValidation($comment_id);
         $this->redirect('/Article/'. $article_id);
     }
-
-    // private function isAdmin()
-    // {
-    //     if(isset($_SESSION['user]']) && in_array('ROLE_ADMIN', $_SESSION['user']['roles']));
-    // }
-    
 }
 
 ?>

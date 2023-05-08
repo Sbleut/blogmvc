@@ -20,7 +20,7 @@
 			<div class="card-body">
 				<h5 class="card-title"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></h5>
 				<h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'); ?></h6>
-				<a href="<?= $config->basepath ?>/Article/<?= $article->id; ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
+				<a href="<?=  htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
 			</div>
 			<div class="list-group list-group-flush">
 				<?php
@@ -29,9 +29,9 @@
 				foreach ($waitingComments as $comment) {
 				?>
 					<div class="list-group-item d-flex">
-						<p>Waiting comment from: <?= $comment->author ?></p>
-						<p><?= $comment->content ?></p>
-						<a class="btn bg-danger text-white" href="<?= $config->basepath ?>/Article/<?= $article->id; ?>/<?= $comment->id ?>/Cancel">Annuler</a>
+						<p>Waiting comment from: <?= htmlspecialchars($comment->author, ENT_QUOTES, 'UTF-8'); ?></p>
+						<p><?= htmlspecialchars($comment->content, ENT_QUOTES, 'UTF-8'); ?></p>
+						<a class="btn bg-danger text-white" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>/<?= htmlspecialchars($comment->id, ENT_QUOTES, 'UTF-8'); ?>/Cancel">Annuler</a>
 						<a class="btn btn-primary" href="<?= $config->basepath ?>/Article/<?= $article->id; ?>/Comment/<?= $comment->id ?>/Valid">Valider</a>
 					</div>
 				<?php } ?>

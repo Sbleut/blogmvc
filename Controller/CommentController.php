@@ -22,8 +22,8 @@ class CommentController extends BaseController
         $comment = new Comment();
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');
-        $author = $_SESSION['user']->getId();
-        if (in_array("ROLE_USER", $_SESSION['user']->getListRole()))
+        $author = $this->session->getSession('user')->getId();
+        if (in_array("ROLE_USER", $this->session->getSession('user')->getListRole()))
         {
             $validation = 1;
         }
