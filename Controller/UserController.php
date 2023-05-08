@@ -65,7 +65,7 @@ class UserController extends BaseController
             $user = $this->UserManager->getByMail($login);
             if (empty($user)) {
                 throw new WrongLoginException();
-                exit;
+                return;
             }
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
