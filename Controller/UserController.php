@@ -19,6 +19,7 @@ class UserController extends BaseController
      */
     public function Signup()
     {
+        
         $this->View("signup");
     }
 
@@ -29,7 +30,8 @@ class UserController extends BaseController
      */
     public function Logout()
     {
-        session_destroy();
+        $this->session->delete('user');
+        $this->session->destroy();
         $this->view("login");
     }
 
@@ -40,6 +42,9 @@ class UserController extends BaseController
      */
     public function UserRetrieve()
     {
+        $this->checkLoggedIn();
+        $user=$this->session->get('user');
+        $this->addParam("user", $user);
         $this->view("profil");
     }
 
@@ -69,14 +74,14 @@ class UserController extends BaseController
             }
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
-                $_SESSION['user'] = $user;
                 foreach ($this->UserManager->getRole($user->getId()) as $role) {
                     $listRole[] = $role['name'];
                 }
-                $_SESSION['user']->setListRole($listRole);
+                $user->setListRole($listRole);                
+                $this->session->set('user', $user);
                 $this->redirect('/');
             }
-        } 
+        }
         if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
             throw new NotAnEmail();
         }
@@ -132,7 +137,7 @@ class UserController extends BaseController
         $destination = $uploadDir . $newFileName;
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
-        } 
+        }
         if (!move_uploaded_file($pic['tmp_name'], $destination)) {
             throw new Exception('Failed to upload file');
         }
@@ -140,7 +145,7 @@ class UserController extends BaseController
         // Preparing Array to use BaseManager::create($obj, $param)
         // Calling UserManager::createUser()
         $user = new User();
-        $user->populate($iId = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
+        $user->populate($id = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
         $result = $this->UserManager->create($user, ['mail', 'password', 'name', 'last_name', 'pic', 'catch_phrase']);
         if (!$result) {
             throw new BDDCreationException();

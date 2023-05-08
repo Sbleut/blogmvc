@@ -22,12 +22,12 @@ class CommentController extends BaseController
         $comment = new Comment();
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');
-        $author = $_SESSION['user']->getId();
-        if (in_array("ROLE_USER", $_SESSION['user']->getListRole()))
+        $author = $this->session->getSession('user')->getId();
+        if (in_array("ROLE_USER", $this->session->getSession('user')->getListRole()))
         {
             $validation = 1;
         }
-        $comment->populate($iId = null, $content, $date, $author, $article, $validation = 0);
+        $comment->populate($id = null, $content, $date, $author, $article, $validation = 0);
         $result = $this->CommentManager->create($comment, ['content', 'date', 'blogpost_id', 'comment_author', 'validation']);
         if (!$result) {
             throw new BDDCreationException();

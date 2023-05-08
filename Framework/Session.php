@@ -1,16 +1,7 @@
 <?php
 
-class SessionManager
+class Session
 {
-    /**
-     * Start session.
-     *
-     * @return void
-     */
-    public function __construct() {
-        session_start();
-    }
-
     /**
      * Set session value.
      *

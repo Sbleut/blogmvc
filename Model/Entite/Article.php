@@ -8,7 +8,7 @@ class Article
 	* The id of the objet in Bdd
 	* @var integer
 	*/
-	public $iId;
+	public $id;
 	/**
 	* A string defining the title. Stored in Bdd as varchar(45)
 	* @var string
@@ -47,7 +47,7 @@ class Article
 	/**
 	 * The populate function has purpose to give the class the data when needed. 
 	 *
-	 * @param [int] $iId
+	 * @param [int] $id
 	 * @param [string] $title
 	 * @param [string] $caption
 	 * @param [string] $content
@@ -55,9 +55,9 @@ class Article
 	 * @param [datetime] $date
 	 * @return void
 	 */
-	public function populate($iId, $title, $caption, $content, $author, $date)
+	public function populate($id, $title, $caption, $content, $author, $date)
 	{
-		$this->id = $iId;
+		$this->id = $id;
 		$this->title = $title;
 		$this->chapo = $caption;
 		$this->content = $content;

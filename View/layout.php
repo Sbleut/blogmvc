@@ -19,39 +19,40 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>">Mon Blog</a>
+                <a class="navbar-brand" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">Mon Blog</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/">Accueil</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/Articles/1">Articles</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Articles/1">Articles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>">À Propos</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>">Contact</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">Contact</a>
                         </li>
                     </ul>
                     <?php
-                    if (empty($_SESSION)) { ?><button class="btn btn-primary"><a class="text-light" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/Login">Se connecter</a></button>
+                    if (!$this->checkLoggedIn()) { ?><button class="btn btn-primary"><a class="text-light" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Login">Se connecter</a></button>
                     <?php }
-                    if (!empty($_SESSION)) {?>
+
+                    if ($this->checkLoggedIn()) { ?>
                         <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/Admin">Mes articles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/Profil">Mon profil</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Mes articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Profil">Mon profil</a>
+                            </li>
                         </ul>
-                        <button class="btn btn-primary"><a class="text-light" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8')?>/Logout">Se déconnecter</a></button>
-                    <?php }?>
+                        <button class="btn btn-primary"><a class="text-light" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Logout">Se déconnecter</a></button>
+                    <?php } ?>
 
                 </div>
             </div>

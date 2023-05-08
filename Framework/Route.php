@@ -126,7 +126,7 @@ class Route
     * @throws ControllerNotFoundException if the controller class does not exist
     * @throws UnauthorizedAccess if the user does not have the required role to access the route
 	*/
-	public function run($httpRequest, $config)
+	public function run($httpRequest, $config, $session)
 	{
 		$controller = null;
 
@@ -145,7 +145,7 @@ class Route
 		}
 
 		if ($this->auth != null) {
-            if (!$this->sessionManager->isAuthenticated() || !$this->sessionManager->get('user')->checkRole($this->auth)) {
+            if (!$session->isAuthenticated() || !$session->get('user')->checkRole($this->auth)) {
                 throw new UnauthorizedAccess();
             }
         }
