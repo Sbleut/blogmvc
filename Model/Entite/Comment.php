@@ -5,7 +5,7 @@
  */
 class Comment
 {
-    public $id; // Comment ID
+    public $iId; // Comment ID
     public $content; // Comment content
     public $comment_author; // Name of the author who posted the comment
     public $blogpost_id; // ID of the blog post that the comment is associated with
@@ -21,7 +21,7 @@ class Comment
 
     /**
      * Populates the Comment object with data.
-     * @param int $id The ID of the comment.
+     * @param int $iId The ID of the comment.
      * @param string $content The content of the comment.
      * @param string $date The date and time the comment was posted.
      * @param string $comment_author The name of the author who posted the comment.
@@ -29,9 +29,9 @@ class Comment
      * @param int $validation The validation status of the comment.
      * @return void
      */
-    public function populate($id, $content, $date, $comment_author, $blogpost_id, $validation)
+    public function populate($iId, $content, $date, $comment_author, $blogpost_id, $validation)
     {
-        $this->id = $id;
+        $this->id = $iId;
         $this->content = $content;
         $this->date = $date;
         $this->comment_author = $comment_author;

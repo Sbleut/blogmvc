@@ -17,13 +17,13 @@ class CommentManager extends BaseManager
     /**
      * Get a comment by article ID.
      *
-     * @param int $id The ID of the article to get the comments for.
+     * @param int $iId The ID of the article to get the comments for.
      * @return Comment The comment object for the given article.
      */
-    public function getByArticle($id)
+    public function getByArticle($iId)
     {
         $req =$this->bdd->prepare("SELECT * FROM user WHERE id=?");
-        $req->execute(array($id));
+        $req->execute(array($iId));
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Comment");
 		return $req->fetch();
     }
@@ -31,11 +31,11 @@ class CommentManager extends BaseManager
     /**
      * Set the validation status of a comment.
      *
-     * @param int $id The ID of the comment to update.
+     * @param int $iId The ID of the comment to update.
      */
-    public function setCommentValidation($id)
+    public function setCommentValidation($iId)
     {
         $req =$this->bdd->prepare("UPDATE comment SET validation=1  WHERE id=?");
-        $req->execute(array($id));
+        $req->execute(array($iId));
     }
 }

@@ -76,7 +76,8 @@ class UserController extends BaseController
                 $_SESSION['user']->setListRole($listRole);
                 $this->redirect('/');
             }
-        } else {
+        } 
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
             throw new NotAnEmail();
         }
     }
@@ -112,7 +113,7 @@ class UserController extends BaseController
         // preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $password);
 
         // PictureManagement
-        $pic = $_FILES['profil-pic'];
+        $pic = $_FILES['profil-pic'] ?? null;
         $bPicOk = true;
         if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
             $bPicOk = false;
@@ -131,14 +132,15 @@ class UserController extends BaseController
         $destination = $uploadDir . $newFileName;
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
-        } else {
+        } 
+        if (!move_uploaded_file($pic['tmp_name'], $destination)) {
             throw new Exception('Failed to upload file');
         }
 
         // Preparing Array to use BaseManager::create($obj, $param)
         // Calling UserManager::createUser()
         $user = new User();
-        $user->populate($id = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
+        $user->populate($iId = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
         $result = $this->UserManager->create($user, ['mail', 'password', 'name', 'last_name', 'pic', 'catch_phrase']);
         if (!$result) {
             throw new BDDCreationException();

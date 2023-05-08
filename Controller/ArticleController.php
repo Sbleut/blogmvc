@@ -45,12 +45,12 @@ class ArticleController extends BaseController
     /**
      * ArticleDetail : Given the Article's ID calls the Article's manager function that provide the article object. Pass the Article objet to the article page.
      *
-     * @param [integer] $id
+     * @param [integer] $iId
      * @return void
      */
-    public function ArticleDetail($id)
+    public function ArticleDetail($iId)
     {
-        $article = $this->ArticleManager->getByIdWithData($id);
+        $article = $this->ArticleManager->getByIdWithData($iId);
 
         $article->commentList = array_filter($article->commentList, function ($comment) {
             return $comment->getValidation() == '1';
@@ -62,12 +62,12 @@ class ArticleController extends BaseController
     /**
      * ArticleDetailUpdate : Given the Article's ID calls the Article's manager function that provide the article. Pass the article object to the article's update page.
      *
-     * @param [integer] $id
+     * @param [integer] $iId
      * @return void
      */
-    public function ArticleDetailUpdate($id)
+    public function ArticleDetailUpdate($iId)
     {
-        $article = $this->ArticleManager->getById($id);
+        $article = $this->ArticleManager->getById($iId);
 
         $author = $this->ArticleManager->getAuthor($article->post_author);
         $article->setPost_author($author);
@@ -120,7 +120,7 @@ class ArticleController extends BaseController
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');
         $author = $_SESSION['user']->getId();
-        $article->populate($id = null, $title, $chapo, $content, $author, $date);
+        $article->populate($iId = null, $title, $chapo, $content, $author, $date);
         $result = $this->ArticleManager->create($article, ['title', 'chapo', 'content', 'post_author', 'date']);
         if (!$result) {
             throw new BDDCreationException();
@@ -132,7 +132,7 @@ class ArticleController extends BaseController
 
     /**
      * Update an article in the database.
-     * @param int $id The ID of the article to update.
+     * @param int $iId The ID of the article to update.
      * @param string $title The new title for the article.
      * @param string $chapo The new chapo for the article.
      * @param string $content The new content for the article.
@@ -140,9 +140,9 @@ class ArticleController extends BaseController
      * @return void
     */
     
-    public function ArticleUpdate($id, $title, $chapo, $content)
+    public function ArticleUpdate($iId, $title, $chapo, $content)
     {
-        $article = $this->ArticleManager->getById($id);
+        $article = $this->ArticleManager->getById($iId);
 
         $article->setTitle($title);
         $article->setChapo($chapo);
@@ -159,13 +159,13 @@ class ArticleController extends BaseController
     /**
      * Article Create is function to create an article from 3 parameters. It pushs data in Bdd using Article Manager. If there is a Bdd Error throw the Bdd error. Eventually redirect to article's page.
      *
-     * @param [integer] $id
+     * @param [integer] $iId
      * @return void
      */
-    public function getArtcilesByAuthor($id)
+    public function getArtcilesByAuthor($iId)
     {
 
-        $articlesList = $this->ArticleManager->getByAuthor($id);
+        $articlesList = $this->ArticleManager->getByAuthor($iId);
         return $articlesList;
     }
 }

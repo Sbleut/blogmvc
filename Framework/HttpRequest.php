@@ -20,8 +20,8 @@ class HttpRequest
 	 */
 	public function __construct($url = null, $method = null)
 	{
-		$this->url = (is_null($url)) ? $_SERVER['REQUEST_URI'] : $url;
-		$this->method = (is_null($method)) ? $_SERVER['REQUEST_METHOD'] : $method;
+		$this->url = (!empty($url)) ? $url : $_SERVER['REQUEST_URI'];
+		$this->method = (!empty($method)) ? $method : $_SERVER['REQUEST_METHOD'];
 		$this->param = array();
 	}
 

@@ -145,9 +145,9 @@ class Route
 		}
 
 		if ($this->auth != null) {
-			if (!$_SESSION['user']->checkRole($this->auth)) {
-				throw new UnauthorizedAccess();
-			}
-		}
+            if (!$this->sessionManager->isAuthenticated() || !$this->sessionManager->get('user')->checkRole($this->auth)) {
+                throw new UnauthorizedAccess();
+            }
+        }
 	}
 }

@@ -25,13 +25,13 @@ class BaseManager
 
 	/**
 	 * Gets a row from the table by its ID.
-	 * @param int $id The ID of the row to fetch.
+	 * @param int $iId The ID of the row to fetch.
 	 * @return mixed The object representing the fetched row.
 	 */
-	public function getById($id)
+	public function getById($iId)
 	{
 		$req = $this->bdd->prepare("SELECT * FROM " . $this->table . " WHERE id=?");
-		$req->execute(array($id));
+		$req->execute(array($iId));
 		$req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->object);
 		return $req->fetch();
 	}

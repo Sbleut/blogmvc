@@ -48,13 +48,13 @@ class ArticleManager extends BaseManager
 
     /**
      * Returns an Article object with the given id.
-     * @param int $id The id of the article to retrieve.
+     * @param int $iId The id of the article to retrieve.
      * @return Article|null The Article object if found, or null if not found.
      */
-    public function getById($id)
+    public function getById($iId)
     {
         $req = $this->bdd->prepare("SELECT * FROM article WHERE id=?");
-        $req->execute(array($id));
+        $req->execute(array($iId));
         $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Article");
         return $req->fetch();
     }
@@ -62,11 +62,11 @@ class ArticleManager extends BaseManager
     /**
      * Fetches an article by ID along with its author and comments.
      *
-     * @param int $id The ID of the article to fetch.
+     * @param int $iId The ID of the article to fetch.
      *
      * @return Article|null The article with the specified ID, or null if not found.
      */
-    public function getByIdWithData($id)
+    public function getByIdWithData($iId)
     {
         $req = $this->bdd->prepare(
             "SELECT article.*, CONCAT(user.name, ' ',  user.last_name) AS author FROM article 
@@ -74,7 +74,7 @@ class ArticleManager extends BaseManager
                 ON article.post_author = user.id
             WHERE article.id=?"
         );
-        $req->execute(array($id));
+        $req->execute(array($iId));
         $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Article");
         $article = $req->fetch();
         $req = $this->bdd->prepare(
@@ -84,7 +84,7 @@ class ArticleManager extends BaseManager
             WHERE comment.blogpost_id=?
             ORDER BY comment.date"
         );
-        $req->execute(array($id));
+        $req->execute(array($iId));
         $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Comment");
         $article->commentList = $req->fetchAll();
         return $article;
@@ -93,10 +93,10 @@ class ArticleManager extends BaseManager
     /**
      * Retrieves all articles written by a given author, along with their associated comments.
      *
-     * @param int $id The ID of the author.
+     * @param int $iId The ID of the author.
      * @return array An array of Article objects.
      */
-    public function getArticlesByAuthorWithData($id)
+    public function getArticlesByAuthorWithData($iId)
     {
         $req = $this->bdd->prepare(
             "SELECT article.*, CONCAT(user.name, ' ',  user.last_name) AS author FROM article 
@@ -104,7 +104,7 @@ class ArticleManager extends BaseManager
                 ON article.post_author = user.id
             WHERE article.post_author=?"
         );
-        $req->execute(array($id));
+        $req->execute(array($iId));
         $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Article");
         $articles = $req->fetchAll();
         foreach ($articles as $article) {

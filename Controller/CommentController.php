@@ -27,7 +27,7 @@ class CommentController extends BaseController
         {
             $validation = 1;
         }
-        $comment->populate($id = null, $content, $date, $author, $article, $validation = 0);
+        $comment->populate($iId = null, $content, $date, $author, $article, $validation = 0);
         $result = $this->CommentManager->create($comment, ['content', 'date', 'blogpost_id', 'comment_author', 'validation']);
         if (!$result) {
             throw new BDDCreationException();

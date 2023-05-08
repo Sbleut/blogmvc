@@ -36,13 +36,13 @@ class userManager extends BaseManager
 	/**
 	 * Retrieves a user by their ID.
 	 *
-	 * @param int $id The ID of the user to retrieve.
+	 * @param int $iId The ID of the user to retrieve.
 	 * @return User|null The User object representing the retrieved user, or null if no user was found.
 	 */
-	public function getById($id)
+	public function getById($iId)
 	{
 		$req = $this->bdd->prepare("SELECT * FROM user WHERE id=?");
-		$req->execute(array($id));
+		$req->execute(array($iId));
 		$req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "User");
 		return $req->fetch();
 	}
@@ -50,15 +50,15 @@ class userManager extends BaseManager
 	/**
 	 * Retrieves the roles of a user.
 	 *
-	 * @param int $id The ID of the user to retrieve roles for.
+	 * @param int $iId The ID of the user to retrieve roles for.
 	 * @return array An array of associative arrays, each representing a role that the user has.
 	 */
-	public function getRole($id)
+	public function getRole($iId)
 	{
 		$req = $this->bdd->prepare("SELECT role.* FROM user_has_role
         INNER JOIN role 
         ON role.id = user_has_role.roleid WHERE userid=?");
-		$req->execute(array($id));
+		$req->execute(array($iId));
 		$req->setFetchMode(PDO::FETCH_ASSOC);
 		return $req->fetchAll();
 	}

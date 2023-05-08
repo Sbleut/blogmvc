@@ -8,7 +8,7 @@ class User
 	/**
 	 * @var int The id of the user.
 	 */
-	private $id;
+	private $iId;
 	/**
 	 * @var array The list of roles associated to the user.
 	 */
@@ -47,7 +47,7 @@ class User
 
 	/**
 	 * Populates the user object with the given data.
-	 * @param int $id The id of the user.
+	 * @param int $iId The id of the user.
 	 * @param string $mail The email of the user.
 	 * @param string $password The hashed password of the user.
 	 * @param string $name The name of the user.
@@ -55,9 +55,9 @@ class User
 	 * @param string $pic The URL of the user's profile picture.
 	 * @param string $catchPhrase The catch phrase of the user.
 	 */
-	public function populate($id, $mail, $password, $name, $lastName, $pic, $catchPhrase)
+	public function populate($iId, $mail, $password, $name, $lastName, $pic, $catchPhrase)
 	{
-		$this->id = $id;
+		$this->id = $iId;
 		$this->password = $password;
 		$this->mail = $mail;
 		$this->name = $name;

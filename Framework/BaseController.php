@@ -21,10 +21,15 @@ class BaseController
      * @var object
      */
     private $httpRequest;
+    /**
+     * The session manager object that is used to manage sessions.
+     * @var object
+     */
+    private $sessionManager;
     /** 
      * An associative array of parameters that will be used to render views.
      * @var array
-     */
+     */    
     private $param;
     /** 
      * The configuration object that stores various settings such as database credentials.
@@ -48,10 +53,11 @@ class BaseController
      * @param object $httpRequest The HttpRequest object that represents the current HTTP request.
      * @param object $config The configuration object that stores various settings such as database credentials.
      */
-    public function __construct($httpRequest, $config)
+    public function __construct($httpRequest, $config, $sessionManager)
     {
-        session_start();
         $this->httpRequest = $httpRequest;
+        $this->sessionManager = new SessionManager();
+        $this->sessionManager->set('httprequest', $httpRequest);
         $this->config = $config;
         $this->param = array();
         $this->addParam("httprequest", $this->httpRequest);
