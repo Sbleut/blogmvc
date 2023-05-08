@@ -5,10 +5,10 @@
 	?>
 		<div class="card my-3">
 			<div class="card-body">
-				<h5 class="card-title"><?= $article->title; ?></h5>
-				<h6 class="card-subtitle mb-2 text-muted"><?= $article->date; ?></h6>
-				<p class="card-text"><?= $article->chapo; ?></p>
-				<a href="<?=$config->basepath?>/Article/<?= $article->id; ?>"><?= $article->title; ?></a>
+				<h5 class="card-title"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></h5>
+				<h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'); ?></h6>
+				<p class="card-text"><?= htmlspecialchars($article->chapo, ENT_QUOTES, 'UTF-8'); ?></p>
+				<a href="<?=$config->basepath?>/Article/<?= $article->id; ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
 				<p><?= $article->post_author; ?></p>
 
 			</div>

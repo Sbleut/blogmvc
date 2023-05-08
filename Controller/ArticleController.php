@@ -125,7 +125,7 @@ class ArticleController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
-        $article = $this->ArticleManager->getByDate($article->date);
+        $article = $this->ArticleManager->getByDate(htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'));
 
         $this->redirect('/Article/' . $article->id);
     }
@@ -151,7 +151,7 @@ class ArticleController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
-        $article = $this->ArticleManager->getByDate($article->date);
+        $article = $this->ArticleManager->getByDate(htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'));
 
         $this->redirect('/Article/' . $article->id);
     }
