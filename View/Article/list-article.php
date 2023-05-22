@@ -8,8 +8,8 @@
 				<h5 class="card-title"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></h5>
 				<h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'); ?></h6>
 				<p class="card-text"><?= htmlspecialchars($article->chapo, ENT_QUOTES, 'UTF-8'); ?></p>
-				<a href="<?= $config->basepath ?>/Article/<?= $article->id; ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
-				<p><?= $article->post_author; ?></p>
+				<a href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
+				<p><?= htmlspecialchars($article->post_author, ENT_QUOTES, 'UTF-8'); ?></p>
 
 			</div>
 		</div>

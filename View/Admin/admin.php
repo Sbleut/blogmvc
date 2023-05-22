@@ -18,7 +18,7 @@
 	?>
 		<div class="card my-3">
 			<div class="card-body">
-				<h5 class="card-title"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></h5>
+				<h5 class="card-title"><?= htmlspecialchars($article->title, ENT_COMPAT, 'UTF-8'); ?></h5>
 				<h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($article->date, ENT_QUOTES, 'UTF-8'); ?></h6>
 				<a href="<?=  htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8'); ?></a>
 			</div>
