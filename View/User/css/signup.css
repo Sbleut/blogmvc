@@ -4,6 +4,9 @@
     justify-content: center;
 }
 
+.card{
+    border-radius: 4rem;
+}
 .gradient-custom-3 {
     /* fallback for old browsers */
     background: #84fab0;
