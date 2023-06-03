@@ -13,7 +13,7 @@
 
     <div class="container">
         <?php
-        if (!$this->checkLoggedIn() && !$this->isAdmin()) { ?>
+        if ($this->checkLoggedIn() && !$this->isAdmin()) { ?>
         <h1>Send your comment</h1>
         <form action="CommentCreate" method="post">
             

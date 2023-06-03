@@ -126,7 +126,7 @@ class UserController extends BaseController
             throw new WrongTypeOfFile();
         }
         // Picture max weight => Redirect Error
-        if ($pic['size'] > 500000) {
+        if ($pic['size'] > 5000000) {
             $bPicOk = false;
             throw new PictureTooBig();
         }
@@ -150,7 +150,13 @@ class UserController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
+        $user = $this->UserManager->getByMail($login);
+        if (!$user) {
+            // User does not exist, handle the error appropriately
+            throw new Exception('User does not exist');
+        }
+        $this->UserManager->setBasicRole($user->getId());
         // Redirect Profile Page.
-        $this->redirect('');
+        $this->Authenticate($login, $password); 
     }
 }

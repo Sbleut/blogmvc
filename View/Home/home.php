@@ -6,6 +6,11 @@
         </div>
     </section>
     <section class="container">
+        <h2>Thomas Sbleut</h2>
+        <img src="uploads/faux_frer.jpg"/>
+        <p>Si t'es pas premier ! T'es dernier !</p>
+    </section>
+    <section class="container">
         <div class="d-flex flex-md-row mb-4 border-none">
             <div class="card-body d-flex flex-column align-items-center">
                 <i class="fas fa-atom"></i>
@@ -28,7 +33,28 @@
                 <h2>A propos</h2>
                 <p>Bienvenue sur notre blog dédié à l'apprentissage du développement web ! Ici, nous vous proposons une multitude de ressources, de conseils et de tutoriels pour vous aider à vous initier ou à approfondir vos connaissances en matière de développement web. Rejoignez notre communauté d'apprenants passionnés et plongez dans le monde fascinant du développement web !</p>
             </div>
-            <div class="card-img"><img class="img-fluid" src="..\..\assets\media\img\adult-gde8461d3d_1280.jpg" alt="" /></div>
+            <div class="card-img"><img class="img-fluid" src="assets\media\img\adult-gde8461d3d_1280.jpg" alt="" /></div>
+        </div>
+    </section>
+    <section>        
+        <div class="container py-4">           
+            <form action="MailCreate" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required" />
+                </div>                
+                <div class="mb-3">
+                    <label class="form-label" for="emailAddress">Email Address</label>
+                    <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required, email" />
+                </div>        
+                <div class="mb-3">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea class="form-control" id="message" type="text" placeholder="Message" data-sb-validations="required"></textarea>
+                </div>        
+                <div class="d-grid">
+                    <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                </div>
+            </form>
         </div>
     </section>
 </main>

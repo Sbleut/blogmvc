@@ -13,4 +13,9 @@ class HomeController extends BaseController
 		{
 			$this->view("home");	
 		}
+
+	public function MailCreate()
+		{
+			
+		}
 }

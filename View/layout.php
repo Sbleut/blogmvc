@@ -35,7 +35,7 @@
                             <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">Contact</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Contact">Contact</a>
                         </li>
                     </ul>
                     <?php

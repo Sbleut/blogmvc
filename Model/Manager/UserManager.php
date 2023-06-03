@@ -62,4 +62,11 @@ class userManager extends BaseManager
 		$req->setFetchMode(PDO::FETCH_ASSOC);
 		return $req->fetchAll();
 	}
+
+	public function setBasicRole($id)
+	{
+		$id = (int)$id; // Cast the parameter to an integer
+		$req = $this->bdd->prepare("INSERT INTO user_has_role (userid, roleid) VALUES ( ?, 2)");
+		return $req->execute(array($id));
+	}
 }
