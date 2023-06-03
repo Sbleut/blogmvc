@@ -52,7 +52,7 @@ class ArticleController extends BaseController
     {
         $article = $this->ArticleManager->getByIdWithData($id);
         
-        if ($article->post_author == $this->session->get('user')->getId()){
+        if (!is_null($this->session->get('user')) && $article->post_author == $this->session->get('user')->getId()){
             $this->addParam("authorisuser", true);        
         }
 
@@ -123,7 +123,7 @@ class ArticleController extends BaseController
         $article = new Article();
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');
-        $author = $this->session->getSession('user')->getId();
+        $author = $this->session->get('user')->getId();
         $article->populate($id = null, $title, $chapo, $content, $author, $date);
         $result = $this->ArticleManager->create($article, ['title', 'chapo', 'content', 'post_author', 'date']);
         if (!$result) {

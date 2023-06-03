@@ -163,6 +163,22 @@
 	"auth":"ROLE_ADMIN"
 },
 {
+	"path" : "/ArticleCreate",
+	"controller" : "Article",
+	"action" : "ArticleCreate",
+	"method" : "POST",
+	"param" : [
+		"title",
+		"chapo",
+		"content"
+	],
+	"manager": [
+		"ArticleManager"
+	],
+	"title": "Création d'article",
+	"auth":"ROLE_ADMIN"
+},
+{
 	"path" : "/ArticleUpdate/([0-9]*)",
 	"controller" : "Article",
 	"action" : "ArticleDetailUpdate",
@@ -231,5 +247,16 @@
 		"UserManager"
 	],
 	"title": "Modification profil"
+},
+{
+	"path" : "/Contact",
+	"controller" : "Contact",
+	"action" : "Contact",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"ContactManager"
+	],
+	"title": "Contact"
 }
 ]
