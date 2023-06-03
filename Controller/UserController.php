@@ -19,7 +19,6 @@ class UserController extends BaseController
      */
     public function Signup()
     {
-        
         $this->View("signup");
     }
 
@@ -108,7 +107,7 @@ class UserController extends BaseController
      *
      * @return void
      */
-    public function Register($login, $password, $checkPasword, $name, $lastName, $catchPhrase)
+    public function Register($login, $password, $checkPasword,  $name, $lastName, $catchPhrase)
     {
         //Check if we can user an object as a parameter 
 
@@ -119,18 +118,20 @@ class UserController extends BaseController
         if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password === $checkPasword) {
             $bMailPassword = true;
         }
+        // Hash the password
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $password);
 
         // PictureManagement
-        $pic = $_FILES['profil-pic'] ?? null;
+        $pic = $_FILES['profile-pic'] ?? null;
         $bPicOk = true;
         if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
             $bPicOk = false;
             throw new WrongTypeOfFile();
         }
         // Picture max weight => Redirect Error
-        if ($pic['size'] > 500000) {
+        if ($pic['size'] > 5000000) {
             $bPicOk = false;
             throw new PictureTooBig();
         }
@@ -144,8 +145,6 @@ class UserController extends BaseController
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
         }
-=======
->>>>>>> Stashed changes
         if (!move_uploaded_file($pic['tmp_name'], $destination)) {
             throw new Exception('Failed to upload file');
         }
@@ -154,23 +153,12 @@ class UserController extends BaseController
         // Preparing Array to use BaseManager::create($obj, $param)
         // Calling UserManager::createUser()
         $user = new User();
-        $user->populate($id = null, $login, $password, $name, $lastName, $picPath, $catchPhrase);
+        $user->populate($id = null, $login, $hashedPassword, $name, $lastName, $picPath, $catchPhrase);
         $result = $this->UserManager->create($user, ['mail', 'password', 'name', 'last_name', 'pic', 'catch_phrase']);
         if (!$result) {
             throw new BDDCreationException();
         }
-<<<<<<< Updated upstream
         // Redirect Profile Page.
         $this->redirect('');
-=======
-        $user = $this->UserManager->getByMail($login);
-        if ($user === null) {
-            // User does not exist, handle the error appropriately.
-            throw new Exception('User does not exist');
-        }
-        $this->UserManager->setBasicRole($user->getId());
-        // Redirect Profile Page.
-        $this->Authenticate($login, $password);
->>>>>>> Stashed changes
     }
 }

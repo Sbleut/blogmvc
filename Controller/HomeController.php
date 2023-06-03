@@ -10,20 +10,13 @@ class HomeController extends BaseController
 	 *
 	 * @return void
 	 */
-<<<<<<< Updated upstream
-    public function Home()
-		{
-			$this->view("home");	
-		}
-}
-=======
+
+
 	public function Home()
 	{
 		$this->view("home");
 	}
-
 	public function MailCreate($name, $email, $message)
 	{
 	}
 }
->>>>>>> Stashed changes

@@ -14,8 +14,6 @@ class HomeManager extends BaseManager
      * A manager for the Home entity, extends the BaseManager class.
      * @param string $datasource The name of the datasource to use for database connection.
      */
-
-
     public function __construct($datasource)
     {
         parent::__construct("home", "home", $datasource);
