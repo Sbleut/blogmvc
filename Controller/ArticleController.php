@@ -52,7 +52,11 @@ class ArticleController extends BaseController
     {
         $article = $this->ArticleManager->getByIdWithData($id);
         
+<<<<<<< Updated upstream
         if ($article->post_author == $this->session->get('user')->getId()){
+=======
+        if ($this->session->get('user')!==null && $article->post_author == $this->session->get('user')->getId()){
+>>>>>>> Stashed changes
             $this->addParam("authorisuser", true);        
         }
 

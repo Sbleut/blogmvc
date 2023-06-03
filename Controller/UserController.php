@@ -43,7 +43,7 @@ class UserController extends BaseController
     public function UserRetrieve()
     {
         $this->checkLoggedIn();
-        $user=$this->session->get('user');
+        $user = $this->session->get('user');
         $this->addParam("user", $user);
         $this->view("profil");
     }
@@ -72,12 +72,17 @@ class UserController extends BaseController
                 throw new WrongLoginException();
                 return;
             }
+<<<<<<< Updated upstream
             // WARNING Need to hash password before pushing to prod
             if ($user->getPassword() == $password) {
+=======
+            // WARNING Need to hash password before pushing to prod.
+            if (password_verify($password, $user->getPassword()) === true) {
+>>>>>>> Stashed changes
                 foreach ($this->UserManager->getRole($user->getId()) as $role) {
                     $listRole[] = $role['name'];
                 }
-                $user->setListRole($listRole);                
+                $user->setListRole($listRole);
                 $this->session->set('user', $user);
                 $this->redirect('/');
             }
@@ -111,7 +116,7 @@ class UserController extends BaseController
         $bMailPassword = false;
         // Password == checkpaswword
         // login == email
-        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password == $checkPasword) {
+        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password === $checkPasword) {
             $bMailPassword = true;
         }
 
@@ -135,12 +140,16 @@ class UserController extends BaseController
         $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
         $newFileName = uniqid() . '.' . $extension;
         $destination = $uploadDir . $newFileName;
+<<<<<<< Updated upstream
         if (move_uploaded_file($pic['tmp_name'], $destination)) {
             $picPath = $destination;
         }
+=======
+>>>>>>> Stashed changes
         if (!move_uploaded_file($pic['tmp_name'], $destination)) {
             throw new Exception('Failed to upload file');
         }
+        $picPath = $destination;
 
         // Preparing Array to use BaseManager::create($obj, $param)
         // Calling UserManager::createUser()
@@ -150,7 +159,18 @@ class UserController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
+<<<<<<< Updated upstream
         // Redirect Profile Page.
         $this->redirect('');
+=======
+        $user = $this->UserManager->getByMail($login);
+        if ($user === null) {
+            // User does not exist, handle the error appropriately.
+            throw new Exception('User does not exist');
+        }
+        $this->UserManager->setBasicRole($user->getId());
+        // Redirect Profile Page.
+        $this->Authenticate($login, $password);
+>>>>>>> Stashed changes
     }
 }
