@@ -32,10 +32,10 @@
                             <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Articles/1">Articles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">À Propos</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/#apropos">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Contact">Contact</a>
+                            <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/#contactform">Contact</a>
                         </li>
                     </ul>
                     <?php
@@ -45,12 +45,30 @@
                     <?php }
                     if ($this->checkLoggedIn()) { ?>
                         <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Mes articles</a>
-                            </li>
+                            <?php
+                            if ($this->isAdmin() === true) {
+                            ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Mes articles</a>
+                                </li>
+                            <?php } ?>
+                            <?php
+                            if ($this->isAdmin() === false) {
+                            ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Devenez Auteur</a>
+                                </li>
+                            <?php } ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Profil">Mon profil</a>
                             </li>
+                            <?php
+                            if ($this->isGod() === true) {
+                            ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Messages">Mes messages</a>
+                                </li>
+                            <?php } ?>
                         </ul>
                         <button class="btn btn-primary"><a class="text-light" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Logout">Se déconnecter</a></button>
                     <?php } ?>

@@ -18,4 +18,15 @@ class HomeManager extends BaseManager
     {
         parent::__construct("home", "home", $datasource);
     }
+
+    /**
+     * GetMailsForUser : Fetch Mails written by a given userId and retrieve message he wrote 
+     */
+    public function GetMailsForGod()
+    {
+        $req = $this->bdd->prepare("SELECT * FROM home");
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Mail");
+        return $req->fetchAll();
+    }
 }

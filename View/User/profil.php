@@ -8,7 +8,7 @@
               <img src="<?= htmlspecialchars($user->getPic(), ENT_QUOTES, 'UTF-8' ); ?>"
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                 style="width: 150px;">
-              <button type="button" class="btn btn-outline-primary" data-mdb-ripple-color="white"><a class="" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/">Edit profile</a>
+              <button type="button" class="btn btn-outline-primary" data-mdb-ripple-color="white"><a class="" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/ProfilUpdate">Edit profile</a>
               </button>
             </div>
             <div class="ms-3" style="margin-top: 130px;">
@@ -19,11 +19,11 @@
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div>
-                <p class="mb-1 h5">253</p>
+                <p class="mb-1 h5"></p>
                 <p class="small text-muted mb-0">Articles</p>
               </div>
               <div class="px-3">
-                <p class="mb-1 h5">1026</p>
+                <p class="mb-1 h5"></p>
                 <p class="small text-muted mb-0">Comments</p>
               </div>
             </div>

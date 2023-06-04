@@ -3,29 +3,28 @@
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6 ">
-          <div class="card gradient-custom-3" >
+          <div class="card gradient-custom-3">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-2">Create an account</h2>
-
-              <form class="sign-up-form "  enctype="multipart/form-data" action="Signup" method="post">
+              <form class="sign-up-form " enctype="multipart/form-data" action="Signup" method="post">
 
                 <div class="form-outline mb-2">
-                  <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Prénom</label>
+                  <input type="text" name="name" class="form-control form-control-lg" />
+                  <label class="form-label" for="name">Prénom</label>
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="text" name="last-name" id="form3Example1cg" class="form-control form-control-lg" />
+                  <input type="text" name="last-name" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example1cg">Nom</label>
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="email" name="login" id="form3Example3cg" class="form-control form-control-lg" />
+                  <input type="email" name="login" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example3cg">Email</label>
 
                 </div>
                 <div class="form-outline mb-2">
-                  <input type="file" name="profile-pic" id="form3Example5cg" class="form-control form-control-lg" accept="image/*" />
+                  <input type="file" name="profile-pic" class="form-control form-control-lg" accept="image/*" />
                   <label class="form-label" for="form3Example5cg">Image de profil</label>
                 </div>
 

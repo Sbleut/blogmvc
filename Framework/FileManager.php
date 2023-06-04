@@ -6,8 +6,20 @@
 
 class FileManager
 {
+    /**
+     * @var array
+     */
     private $listJsFile;
+
+    /**
+     * @var array
+     */
     private $listCssFile;
+
+    /**
+     * @var array
+     */
+    private $files;
 
     /**
      *Constructor for FileManager class.
@@ -17,6 +29,7 @@ class FileManager
     {
         $this->listJsFile = array();
         $this->listCssFile = array();
+        $this->files = $_FILES;
     }
 
     /**
@@ -65,5 +78,10 @@ class FileManager
             $cssContent .= '<link rel="stylesheet" type="text/css" href="' . $cssFile . '" />';
         }
         return $cssContent;
+    }
+
+    public function getFiles(): array
+    {
+        return $this->files;
     }
 }

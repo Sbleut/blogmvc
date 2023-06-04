@@ -90,6 +90,7 @@ class BaseController
             $title = $this->title;
             $jsContent = $this->fileManager->generateJs($filename);
             $cssContent = $this->fileManager->generateCss($filename);
+            $files = $this->fileManager->getFiles();
 
             include("View/layout.php");
         } else {
@@ -172,5 +173,18 @@ class BaseController
             return true;
         }
         return false;
+    }
+
+    public function isGod(): bool
+    {
+        if($this->checkLoggedIn() && in_array('ROLE_GOD', $this->session->get('user')->getListRole())){
+            return true;
+        }
+        return false;
+    }
+
+    public function getFileMananger()
+    {
+        return $this->fileManager;
     }
 }

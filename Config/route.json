@@ -8,6 +8,32 @@
 	"title": "Accueil"
 },
 {
+	"path" : "/MailCreate",
+	"controller" : "Home",
+	"action" : "MailCreate",
+	"method" : "POST",
+	"param" : [
+		"name",
+		"email",
+		"message"
+	],
+	"manager": [
+		"HomeManager"
+	],
+	"title": "Envoyez votre message"
+},
+{
+	"path" : "/Messages",
+	"controller" : "Home",
+	"action" : "MailRetrieve",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"HomeManager"
+	],
+	"title": "Vos messages"
+},
+{
 	"path" : "/Login",
 	"controller" : "User",
 	"action" : "Login",
@@ -246,7 +272,37 @@
 	"manager": [
 		"UserManager"
 	],
-	"title": "Modification profil"
+	"title": "Page du profil"
+},
+{
+	"path" : "/ProfilUpdate",
+	"controller" : "User",
+	"action" : "UserGetUpdate",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Modification du profil"
+},
+{
+	"path" : "/UserUpdate",
+	"controller" : "User",
+	"action" : "UserUpdate",
+	"method" : "POST",
+	"param" : [
+		"login",
+		"password",
+		"check-password",
+		"name",
+		"last-name",		
+		"catch-phrase",
+		"profil-pic"
+	],
+	"manager": [
+		"UserManager"
+	],
+	"title": "Modification du profil"
 },
 {
 	"path" : "/Contact",

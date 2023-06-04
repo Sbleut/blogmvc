@@ -29,7 +29,7 @@
             </diV>
         </div>
         <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
+            <div id="apropos" class="card-body d-flex flex-column align-items-start">
                 <h2>A propos</h2>
                 <p>Bienvenue sur notre blog dédié à l'apprentissage du développement web ! Ici, nous vous proposons une multitude de ressources, de conseils et de tutoriels pour vous aider à vous initier ou à approfondir vos connaissances en matière de développement web. Rejoignez notre communauté d'apprenants passionnés et plongez dans le monde fascinant du développement web !</p>
             </div>
@@ -37,19 +37,20 @@
         </div>
     </section>
     <section>        
-        <div class="container py-4">           
-            <form action="MailCreate" method="post">
+        <div class="container py-4">
+            <h2>Contactez-moi</h2>           
+            <form id="contactform" enctype="multipart/form-data" action="MailCreate" method="post">
                 <div class="mb-3">
                     <label class="form-label" for="name">Name</label>
-                    <input class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required" />
+                    <input class="form-control" name="name" type="text" placeholder="Name" data-sb-validations="required" />
                 </div>                
                 <div class="mb-3">
                     <label class="form-label" for="emailAddress">Email Address</label>
-                    <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required, email" />
+                    <input class="form-control" name="email" type="email" placeholder="Email Address" data-sb-validations="required, email" />
                 </div>        
                 <div class="mb-3">
                     <label class="form-label" for="message">Message</label>
-                    <textarea class="form-control" id="message" type="text" placeholder="Message" data-sb-validations="required"></textarea>
+                    <textarea class="form-control" name="message" type="text" placeholder="Message" data-sb-validations="required"></textarea>
                 </div>        
                 <div class="d-grid">
                     <button class="btn btn-primary btn-lg" type="submit">Submit</button>

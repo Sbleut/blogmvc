@@ -16,7 +16,28 @@ class HomeController extends BaseController
 	{
 		$this->view("home");
 	}
+
 	public function MailCreate($name, $email, $message)
 	{
+		$mail = new Mail();
+		$mail->populate($id = null, $name, $email, $message);
+		$bddPush = $this->HomeManager->create($mail, ['name', 'email_address', 'message']);
+		if ($bddPush===false) {
+            throw new BDDCreationException();
+        }
+		// Redirect Profile Page.
+        $this->redirect('');
+	}
+
+	//Set to protecte or private when working.
+	public function MailRetrieve()
+	{
+		$aRoleUser=$this->session->get('user')->getListRole();
+		if(in_array( "ROLE_GOD", $aRoleUser)){
+			$mailList = $this->HomeManager->GetMailsForGod();
+		}
+		$this->addParam("mailList", $mailList);
+
+		$this->view("mails");
 	}
 }
