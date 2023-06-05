@@ -92,22 +92,10 @@
         <div class="container ">
             <!-- Section: Social media -->
             <section class="mb-0">
-                <!-- Facebook -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
-
-                <!-- Twitter -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
-
-                <!-- Google -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
-
-                <!-- Instagram -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
-
                 <!-- Linkedin -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://www.linkedin.com/in/thomas-sublet" role="button" data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
                 <!-- Github -->
-                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://github.com/Sbleut" role="button" data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
             </section>
             <!-- Section: Social media -->
         </div>
@@ -116,7 +104,8 @@
         <!-- Copyright -->
         <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
-            <a class="text-dark" href="https://localhost/blogmvc/">Web Dev Blog</a>
+            <a class="text-dark" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>">Web Dev Blog</a>
+            <a class="text-dark" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Admin access</a>
         </div>
         <!-- Copyright -->
     </footer>

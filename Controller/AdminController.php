@@ -10,7 +10,7 @@ class AdminController extends BaseController
     public function Dashboard()
     {
         if($this->isAdmin()===false){
-            $this->redirect('/');            
+            $this->redirect('/Login');            
         }
         $articles = $this->ArticleManager->getArticlesByAuthorWithData($this->session->get('user')->getId());        
         $this->addParam("articles", $articles);

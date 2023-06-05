@@ -15,6 +15,7 @@
             <h2>Thomas Sbleut</h2>
             <img src="uploads/faux_frer.jpg" />
             <p>Si t'es pas premier ! T'es dernier !</p>
+            <a href="uploads/cv_thomas.pdf" target="_blank">Ouvrir le CV</a>
         </section>
         <section class="container">
             <div class="flex-md-row m-4 border-none">
