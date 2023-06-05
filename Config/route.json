@@ -15,7 +15,8 @@
 	"param" : [
 		"name",
 		"email",
-		"message"
+		"message",
+		"admin_request"
 	],
 	"manager": [
 		"HomeManager"

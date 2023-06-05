@@ -17,11 +17,11 @@ class HomeController extends BaseController
 		$this->view("home");
 	}
 
-	public function MailCreate($name, $email, $message)
+	public function MailCreate($name, $email, $message, $admin_request=0)
 	{
 		$mail = new Mail();
-		$mail->populate($id = null, $name, $email, $message);
-		$bddPush = $this->HomeManager->create($mail, ['name', 'email_address', 'message']);
+		$mail->populate($id = null, $name, $email, $message, $admin_request);
+		$bddPush = $this->HomeManager->create($mail, ['name', 'email_address', 'message', 'admin_request']);
 		if ($bddPush===false) {
             throw new BDDCreationException();
         }

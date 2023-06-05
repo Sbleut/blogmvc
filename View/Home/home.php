@@ -2,7 +2,7 @@
     <section class="intro p-3 p-md-5 text-white  d-flex flex-column bg-dark align-items-center">
         <div>
             <h1 class="display-4 font-italic">Web dev Blog</h1>
-            <p class="lead my-3 text-center">How to become a web dev ? </p>
+            <p class="lead my-3 text-center">Comment devenir web dev ? </p>
         </div>
     </section>
     <section>
@@ -10,29 +10,29 @@
             
         </div>
     </section>
-    <div class="d-flex container">
+    <div class=" d-flex container">
         <section class="container">
             <h2>Thomas Sbleut</h2>
-            <img src="uploads/faux_frer.jpg" />
-            <p>Si t'es pas premier ! T'es dernier !</p>
+            <img src="uploads/faux_frer.jpg"/>
+            <p>Pour un apprentissage en douceur</p>
             <a href="uploads/cv_thomas.pdf" target="_blank">Ouvrir le CV</a>
         </section>
         <section class="container">
             <div class="flex-md-row m-4 border-none">
                 <div class="card-body d-flex flex-column align-items-center mt-5">
                     <i class="fas fa-atom"></i>
-                    <h3 class="m-3">Getting started</h3>
-                    <p class="card-text text-center">Discover the essentials of web development and build your online presence with confidence.</p>
+                    <h3 class="m-3">Bien débuter</h3>
+                    <p class="card-text text-center">Découvrez les bases du développement web et construisez votre présence en ligne en toute confiance.</p>
                 </diV>
                 <div class="card-body d-flex flex-column align-items-center mt-5">
                     <i class="fas fa-skiing"></i>
-                    <h3 class="m-3">Learning methods</h3>
-                    <p class="card-text text-center">Explore effective learning methods to master web development at your own pace.</p>
+                    <h3 class="m-3">Méthodes</h3>
+                    <p class="card-text text-center">Explorez des méthodes d'apprentissage efficaces pour maîtriser le développement web à votre rythme.</p>
                 </diV>
                 <div class="card-body d-flex flex-column align-items-center mt-5">
                     <i class="fas fa-ethernet"></i>
-                    <h3 class="m-3">Advanced topics</h3>
-                    <p class="card-text text-center">Exploring cutting-edge techniques and technologies in the world of web development.</p>
+                    <h3 class="m-3">Sujet avancé</h3>
+                    <p class="card-text text-center">Explorez les techniques et technologies de pointe dans le monde du développement web.</p>
                 </diV>
             </div>
         </section>

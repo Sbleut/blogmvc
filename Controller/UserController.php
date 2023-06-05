@@ -142,7 +142,7 @@ class UserController extends BaseController
 
         // PictureManagement
         $aProfilpic = $this->getFileMananger()->getFiles();
-        $pic = $aProfilpic['profil-pic'] ?? null;
+        $pic = $aProfilpic['profile-pic'] ?? null;
         if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
             throw new WrongTypeOfFile();
         }
@@ -155,17 +155,18 @@ class UserController extends BaseController
          // Path to files New Folder 
          $uploadDir = 'uploads/';
          $destination = 'assets/media/img/default-profil-pic.png';
+         $picPath = null;
          if ($pic !== null) {
              $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
              $newFileName = uniqid() . '.' . $extension;
-             $destination = $uploadDir . $newFileName;
- 
-             if (move_uploaded_file($pic['tmp_name'], $destination)) {
+             $destination = $uploadDir . $newFileName;                   
+             if (move_uploaded_file($pic['tmp_name'], $destination)!==null) {
                  $picPath = $destination;
              }
-             if (!move_uploaded_file($pic['tmp_name'], $destination)) {
+             if ($picPath===null) {
                  throw new Exception('Failed to upload file');
              }
+             
          }
         $picPath = $destination;
 
