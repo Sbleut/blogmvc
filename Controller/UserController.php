@@ -43,6 +43,8 @@ class UserController extends BaseController
     {
         $this->checkLoggedIn();
         $user = $this->session->get('user');
+        $comments =$this->CommentManager->getByAuthor($user->getId());
+        $this->addParam("comments", $comments);
         $this->addParam("user", $user);
         $this->view("profil");
     }
@@ -85,13 +87,18 @@ class UserController extends BaseController
                 return;
             }
             // WARNING Need to hash password before pushing to prod.
-            if (password_verify($password, $user->getPassword()) === true) {
+            if (password_verify($password, $user->getPassword())) {
                 foreach ($this->UserManager->getRole($user->getId()) as $role) {
                     $listRole[] = $role['name'];
                 }
                 $user->setListRole($listRole);
                 $this->session->set('user', $user);
                 $this->redirect('/');
+            }
+            if (password_verify($password, $user->getPassword())===false){
+                $confirmationMessage = "Echec de la connection, email ou mot de passe incorrect";
+                $this->session->set('confirmationMessage', $confirmationMessage);
+                $this->redirect('/Login');
             }
         }
         if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {

@@ -52,6 +52,7 @@ class ArticleController extends BaseController
     {
         $article = $this->ArticleManager->getByIdWithData($id);
         
+        $this->addParam("authorisuser", false); 
         if ($this->session->get('user')!==null && $article->post_author == $this->session->get('user')->getId()){
             $this->addParam("authorisuser", true);        
         }
@@ -173,7 +174,7 @@ class ArticleController extends BaseController
     }
 
     /**
-     * ArticleDElete is a function to delete a specific article by id
+     * ArticleDelete is a function to delete a specific article by id
      * 
      * @param [integer] $id
      * @return void
@@ -181,6 +182,13 @@ class ArticleController extends BaseController
     public function ArticleDelete($id)
     {
         $article = $this->ArticleManager->getById($id);
+        $comments = $this->CommentManager->getByArticle($article->id);
+        foreach($comments as $comment){
+            $bdddelete = $this->CommentManager->delete($comment);
+            if (!$bdddelete) {
+                throw new BDDCreationException();
+            }
+        }
         $bdddelete = $this->ArticleManager->delete($article);
         if (!$bdddelete) {
             throw new BDDCreationException();

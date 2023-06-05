@@ -13,16 +13,16 @@
 
     <div class="container">
         <?php
-        if ($this->checkLoggedIn() && !$this->isAdmin()) { ?>
-        <h1>Send your comment</h1>
+        if ($this->checkLoggedIn()) { ?>
+        <h4>Commentaires</h4>
         <form action="CommentCreate" method="post">
             
             <div class="form-group">
                 <input type=hidden name="article" value="<?= $article->id ?>">
-                <label for="content">Content</label>
+                <label for="content">Envoyer votre commentaire</label>
                 <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary mt-3">Create</button>
         </form>
         <?php }
         ?>

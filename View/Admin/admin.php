@@ -21,7 +21,7 @@
 					</div>
 					<div class="d-flex align-items-center justify-content-around">
 						<button class="btn btn-primary d-block m-3"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') . '/ArticleUpdate/' . htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8') ?>">Modifier</a></button>
-						<button class="btn btn-danger d-block"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8').'/ArticleDelete/'. htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8') ?>">Supprimer</a></button>
+						<button class="btn btn-danger d-block"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') . '/ArticleDelete/' . htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8') ?>">Supprimer</a></button>
 					</div>
 				</div>
 				<div class="list-group list-group-flush">
@@ -30,11 +30,16 @@
 					$waitingComments = $article->commentList;
 					foreach ($waitingComments as $comment) {
 					?>
-						<div class="list-group-item d-flex">
-							<h4>Waiting comment from: <?= htmlspecialchars($comment->author, ENT_QUOTES, 'UTF-8'); ?></h4>
-							<p><?= htmlspecialchars($comment->content, ENT_QUOTES, 'UTF-8'); ?></p>
-							<a class="btn bg-danger text-white mr-3" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>/<?= htmlspecialchars($comment->id, ENT_QUOTES, 'UTF-8'); ?>/Cancel">Annuler</a>
-							<a class="btn btn-primary" href="<?= $config->basepath ?>/Article/<?= $article->id; ?>/Comment/<?= $comment->id ?>/Valid">Valider</a>
+						<div class="list-group-item d-flex justify-content-between">
+							<div>
+								<h5>Commentaire en attente de: <?= htmlspecialchars($comment->author, ENT_QUOTES, 'UTF-8'); ?></h5>
+								<p><?= htmlspecialchars($comment->content, ENT_QUOTES, 'UTF-8'); ?></p>
+							</div>
+
+							<div class="d-flex align-items-center justify-content-around">
+								<a class="btn btn-primary d-block m-3" href="<?= $config->basepath ?>/Article/<?= $article->id; ?>/Comment/<?= $comment->id ?>/Valid">Valider</a>
+								<a class="btn bg-danger d-block text-white " href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/Article/<?= htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8'); ?>/<?= htmlspecialchars($comment->id, ENT_QUOTES, 'UTF-8'); ?>/Cancel">Annuler</a>
+							</div>
 						</div>
 					<?php } ?>
 				</div>
