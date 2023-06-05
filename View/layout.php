@@ -76,6 +76,16 @@
             </div>
         </nav>
     </header>
+    <section>
+    <?php
+            $message = $this->session->get('confirmationMessage');
+            $this->session->delete('confirmationMessage');
+            if ($message !== null) { ?>
+                <div class="alert alert-primary" role="alert">
+                    <?= $message ?>
+                </div>
+            <?php } ?>
+    </section>    
     <?= $content; ?>
     <footer class="text-center text-white" style="background-color: #f1f1f1;">
         <!-- Grid container -->

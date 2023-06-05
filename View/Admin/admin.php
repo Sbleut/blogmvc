@@ -21,7 +21,7 @@
 					</div>
 					<div class="d-flex align-items-center justify-content-around">
 						<button class="btn btn-primary d-block m-3"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') . '/ArticleUpdate/' . htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8') ?>">Modifier</a></button>
-						<button class="btn btn-danger d-block"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8'); ?>/ArticleDelete">Supprimer</a></button>
+						<button class="btn btn-danger d-block"><a class="text-reset" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8').'/ArticleDelete/'. htmlspecialchars($article->id, ENT_QUOTES, 'UTF-8') ?>">Supprimer</a></button>
 					</div>
 				</div>
 				<div class="list-group list-group-flush">

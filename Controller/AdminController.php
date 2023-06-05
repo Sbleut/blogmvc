@@ -71,6 +71,8 @@ class AdminController extends BaseController
 		if ($bddPush===false) {
             throw new BDDCreationException();
         }
+
+        $this->HomeManager->delete($mail);
 		// Redirect Profile Page.
         $confirmationMessage = 'Your action was successful!';
         $this->session->set("confirmationMessage", $confirmationMessage);

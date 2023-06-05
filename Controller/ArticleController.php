@@ -168,8 +168,25 @@ class ArticleController extends BaseController
      */
     public function getArtcilesByAuthor($id)
     {
-
         $articlesList = $this->ArticleManager->getByAuthor($id);
         return $articlesList;
+    }
+
+    /**
+     * ArticleDElete is a function to delete a specific article by id
+     * 
+     * @param [integer] $id
+     * @return void
+     */
+    public function ArticleDelete($id)
+    {
+        $article = $this->ArticleManager->getById($id);
+        $bdddelete = $this->ArticleManager->delete($article);
+        if (!$bdddelete) {
+            throw new BDDCreationException();
+        }
+        $confirmationMessage = "Votre article a bien été supprimé";
+        $this->session->set('confirmationMessage', $confirmationMessage);
+        $this->redirect('/Admin');
     }
 }

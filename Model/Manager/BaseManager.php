@@ -108,9 +108,10 @@ class BaseManager
 	 */
 	public function delete($obj)
 	{
+
 		if (property_exists($obj, "id")) {
 			$req = $this->bdd->prepare("DELETE FROM " . $this->table . " WHERE id=?");
-			return $req->execute(array($obj->id));
+			return $req->execute(array($obj->getId()));
 		} else {
 			throw new PropertyNotFoundException($this->object, "id");
 		}

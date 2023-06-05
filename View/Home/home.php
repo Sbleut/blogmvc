@@ -7,14 +7,7 @@
     </section>
     <section>
         <div class="container">
-            <?php
-            $message = $this->session->get('confirmationMessage');
-            $this->session->delete('confirmationMessage');
-            if ($message !== null) { ?>
-                <div class="alert alert-primary" role="alert">
-                    <?= $message ?>
-                </div>
-            <?php } ?>
+            
         </div>
     </section>
     <div class="d-flex container">

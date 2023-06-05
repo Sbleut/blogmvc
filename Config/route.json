@@ -258,6 +258,19 @@
 	"title": "Modification de l'article"
 },
 {
+	"path" : "/ArticleDelete/([0-9]*)",
+	"controller" : "Article",
+	"action" : "ArticleDelete",
+	"method" : "GET",
+	"param" : [
+		"id"
+	],
+	"manager": [
+		"ArticleManager"
+	],
+	"title": "Suppression de l'article"
+},
+{
 	"path" : "/ArticleUpdate",
 	"controller" : "Article",
 	"action" : "ArticleUpdate",
