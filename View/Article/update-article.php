@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea class="form-control" id="content" name="content" rows="5" required><?=htmlspecialchars($article->content, ENT_COMPAT, 'UTF-8') ?></textarea>
+            <textarea class="form-control" id="content" name="content" rows="5" required value="<?=htmlspecialchars($article->content, ENT_COMPAT, 'UTF-8') ?>"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>

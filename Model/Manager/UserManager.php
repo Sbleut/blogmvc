@@ -63,10 +63,31 @@ class userManager extends BaseManager
 		return $req->fetchAll();
 	}
 
+	/**
+	 * Set the basic ROLE_USER to a given user.
+	 *
+	 * @param int $id The ID of the user to set role for.
+	 * @return bool True or false depending on the success of the execution in bdd.
+	 */
 	public function setBasicRole($id)
 	{
 		$id = (int)$id; // Cast the parameter to an integer
 		$req = $this->bdd->prepare("INSERT INTO user_has_role (userid, roleid) VALUES ( ?, 2)");
 		return $req->execute(array($id));
+	}
+
+	/**
+	 * Ad a new role a given user.
+	 *
+	 * @param int $id The ID of the user to set role for.
+	 * @param string $role The string defining the role ('ROLE_ADMIN' = 1, 'ROLE_USER' = 2 or others to come).
+	 * @return bool True or false depending on the success of the execution in bdd.
+	 */
+	public function addNewRole($id, $role_id=2)
+	{
+		$id = (int)$id; // Cast the parameter to an integer
+		$role_id = (int)$role_id;
+		$req = $this->bdd->prepare("INSERT INTO user_has_role (userid, roleid) VALUES ( ?, ?)");
+		return $req->execute(array($id, $role_id));
 	}
 }

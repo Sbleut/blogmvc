@@ -121,6 +121,46 @@
 	"auth": "ROLE_ADMIN"
 },
 {
+	"path" : "/AdminRequest",
+	"controller" : "Admin",
+	"action" : "AdminRequestGet",
+	"method" : "GET",
+	"param" : [],
+	"manager": [
+	],
+	"title": "Demande pour devenir administrateur",
+	"auth": "ROLE_USER"
+},
+{
+	"path" : "/AdminRequestPost",
+	"controller" : "Admin",
+	"action" : "AdminRequestPost",
+	"method" : "POST",
+	"param" : [
+		"content"
+	],
+	"manager": [
+		"HomeManager"
+	],
+	"title": "Demande pour devenir administrateur",
+	"auth": "ROLE_USER"
+},
+{
+	"path" : "/AdminValidate/([0-9]*)",
+	"controller" : "Admin",
+	"action" : "AdminValidateGet",
+	"method" : "GET",
+	"param" : [
+		"mail_id"
+	],
+	"manager": [
+		"UserManager",
+		"HomeManager"
+	],
+	"title": "Validation administrateur",
+	"auth": "ROLE_GOD"
+},
+{
 	"path" : "/Article/([0-9]*)/Comment/([0-9]*)/Valid",
 	"controller" : "Admin",
 	"action" : "ValidateComment",

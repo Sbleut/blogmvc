@@ -29,4 +29,18 @@ class HomeManager extends BaseManager
         $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Mail");
         return $req->fetchAll();
     }
+
+    /**
+	 * Retrieves a mail by its ID.
+	 *
+	 * @param int $id The ID of the mail to retrieve.
+	 * @return Mail|null The Mail object representing the retrieved mail, or null if no mail was found.
+	 */
+	public function getById($id)
+	{
+		$req = $this->bdd->prepare("SELECT * FROM home WHERE id=?");
+		$req->execute(array($id));
+		$req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "MAil");
+		return $req->fetch();
+	}
 }

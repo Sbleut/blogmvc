@@ -17,12 +17,17 @@ class Mail
     /**
 	 * @var string Email address of the author.
 	 */
-	private $mail;
+	private $email_address;
 
     /**
 	 * @var string The message left by the author
 	 */
 	private $message;
+
+	/**
+	 * @var boolean The adminRequest is true is the message is an admin request.
+	 */
+	private $admin_request;
 
     /**
 	 * Mail constructor.
@@ -37,14 +42,16 @@ class Mail
      * @param string $name Mail author's name.
      * @param string $mail Email address of the author.
      * @param string $message The message left by the author.
+	 * @param bool $adminRequest The 
      */
 
-     public function populate($id, $name, $mail, $message)
+     public function populate($id, $name, $email_address, $message, $admin_request)
      {
         $this->id=$id;
         $this->name=$name;
-        $this->mail=$mail;
+        $this->email_address=$email_address;
         $this->message=$message;
+		$this->admin_request=$admin_request;
      }
 
      /**
@@ -78,16 +85,16 @@ class Mail
 	 */
 	public function getEmail_address()
 	{
-		return $this->mail;
+		return $this->email_address;
 	}
 
 	/**
 	 * Sets the email of the user.
 	 * @param string $mail The new email of the user.
 	 */
-	public function setEmail_address($mail)
+	public function setEmail_address($email_address)
 	{
-		$this->mail = $mail;
+		$this->email_address = $email_address;
 	}
 
     /**
@@ -99,12 +106,29 @@ class Mail
 	}
 
 	/**
-	 * Sets the email of the user.
-	 * @param string $mail The new email of the user.
+	 * Sets the message of the user.
+	 * @param string $message The message of the user.
 	 */
 	public function setMessage($message)
 	{
 		$this->message = $message;
+	}
+
+	/**
+	 * @return bool Returns true or false.
+	 */
+	public function getAdmin_request()
+	{
+		return $this->admin_request;
+	}
+
+	/**
+	 * Sets the adminRequest to true or false.
+	 * @param  bool  $adminRequest is the message an admin request or not.
+	 */
+	public function setAdmin_request($admin_request)
+	{
+		$this->admin_request = $admin_request;
 	}
 }
 

@@ -56,7 +56,7 @@
                             if ($this->isAdmin() === false) {
                             ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/Admin">Devenez Auteur</a>
+                                    <a class="nav-link" href="<?= htmlspecialchars($config->basepath, ENT_QUOTES, 'UTF-8') ?>/AdminRequest">Devenez Auteur</a>
                                 </li>
                             <?php } ?>
                             <li class="nav-item">
