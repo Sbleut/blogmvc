@@ -121,6 +121,9 @@ class ArticleController extends BaseController
      */
     public function ArticleCreate($title, $chapo, $content)
     {
+        if($title === null || $content === null){
+            throw new NoTitleNoContent();
+        }
         $article = new Article();
         $date = new DateTime();
         $date = $date->format('Y-m-d H:i:s');

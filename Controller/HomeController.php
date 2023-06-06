@@ -19,6 +19,9 @@ class HomeController extends BaseController
 
 	public function MailCreate($name, $email, $message, $admin_request=0)
 	{
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new MissingDataToRegister();
+        }
 		$mail = new Mail();
 		$mail->populate($id = null, $name, $email, $message, $admin_request);
 		$bddPush = $this->HomeManager->create($mail, ['name', 'email_address', 'message', 'admin_request']);

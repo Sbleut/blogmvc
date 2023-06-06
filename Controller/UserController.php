@@ -133,6 +133,8 @@ class UserController extends BaseController
         if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password === null || $name === null) {
             throw new MissingDataToRegister();
         }
+        // Mail Unicity
+
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -145,8 +147,7 @@ class UserController extends BaseController
         $uploadDir = 'uploads/';
         $destination = 'assets/media/img/default-profil-pic.png';
         $picPath = null;
-        if ($pic !== null) {
-
+        if ($pic !== null && $pic['error']!==4) {
             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
             $newFileName = uniqid() . '.' . $extension;
             $destination = $uploadDir . $newFileName;
@@ -177,7 +178,9 @@ class UserController extends BaseController
 
         // Setting Default Role User
         $user = $this->UserManager->getByMail($login);
-        $roleSet = $this->UserManager->addNewRole($user->getId());
+        var_dump();
+        die;
+        $this->UserManager->addNewRole($user->getId());
 
         $confirmationMessage = 'Votre compte a été créé avec succès! Vous pouvez vous connecter';
         $this->session->set("confirmationMessage", $confirmationMessage);
@@ -221,7 +224,7 @@ class UserController extends BaseController
         $uploadDir = 'uploads/';
         $destination = 'assets/media/img/default-profil-pic.png';
         $picPath = null;
-        if ($pic !== null) {
+        if ($pic !== null && $pic['error']) {
             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
             $newFileName = uniqid() . '.' . $extension;
             $destination = $uploadDir . $newFileName;
