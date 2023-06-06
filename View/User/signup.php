@@ -9,17 +9,17 @@
               <form class="sign-up-form " enctype="multipart/form-data" action="Signup" method="post">
 
                 <div class="form-outline mb-2">
-                  <input type="text" name="name" class="form-control form-control-lg" />
+                  <input type="text" name="name" class="form-control form-control-lg" required />
                   <label class="form-label" for="name">Prénom</label>
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="text" name="last-name" class="form-control form-control-lg" />
+                  <input type="text" name="last-name" class="form-control form-control-lg" required />
                   <label class="form-label" for="form3Example1cg">Nom</label>
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="email" name="login" class="form-control form-control-lg" />
+                  <input type="email" name="login" class="form-control form-control-lg" required />
                   <label class="form-label" for="form3Example3cg">Email</label>
 
                 </div>
@@ -34,12 +34,12 @@
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
+                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" required />
                   <label class="form-label" for="form3Example4cg">Mot de passe</label>
                 </div>
 
                 <div class="form-outline mb-2">
-                  <input type="password" name="check-password" id="form3Example4cdg" class="form-control form-control-lg" />
+                  <input type="password" name="check-password" id="form3Example4cdg" class="form-control form-control-lg" required />
                   <label class="form-label" for="form3Example4cdg">Confirmation du mot de passe</label>
                 </div>
 

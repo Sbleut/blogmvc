@@ -48,7 +48,7 @@ class AdminController extends BaseController
             throw new BDDCreationException();
         }
 		// Redirect Profile Page.
-        $confirmationMessage = 'Your action was successful!';
+        $confirmationMessage = 'Votre action a été effectuée avec succès!';
         $this->session->set("confirmationMessage", $confirmationMessage);
         $this->redirect('/');
     }
@@ -74,7 +74,7 @@ class AdminController extends BaseController
 
         $this->HomeManager->delete($mail);
 		// Redirect Profile Page.
-        $confirmationMessage = 'Your action was successful!';
+        $confirmationMessage = 'Votre action a été effectuée avec succès!';
         $this->session->set("confirmationMessage", $confirmationMessage);
         $this->redirect('/');
     }

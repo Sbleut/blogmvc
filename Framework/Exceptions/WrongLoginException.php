@@ -12,6 +12,6 @@ class WrongLoginException extends Exception
 	 */
 	public function __construct($message = "No account has been found")
 	{
-		parent::__construct($message, "0006");
+		parent::__construct($message, "0011");
 	}
 }

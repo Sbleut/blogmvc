@@ -43,7 +43,7 @@ class UserController extends BaseController
     {
         $this->checkLoggedIn();
         $user = $this->session->get('user');
-        $comments =$this->CommentManager->getByAuthor($user->getId());
+        $comments = $this->CommentManager->getByAuthor($user->getId());
         $this->addParam("comments", $comments);
         $this->addParam("user", $user);
         $this->view("profil");
@@ -95,7 +95,7 @@ class UserController extends BaseController
                 $this->session->set('user', $user);
                 $this->redirect('/');
             }
-            if (password_verify($password, $user->getPassword())===false){
+            if (password_verify($password, $user->getPassword()) === false) {
                 $confirmationMessage = "Echec de la connection, email ou mot de passe incorrect";
                 $this->session->set('confirmationMessage', $confirmationMessage);
                 $this->redirect('/Login');
@@ -126,14 +126,12 @@ class UserController extends BaseController
 
     public function Register($login, $password, $checkPasword,  $name, $lastName, $catchPhrase)
     {
+
         //Check if we can user an object as a parameter 
 
         // Checking User Form
-        $bMailPassword = false;
-        // Password == checkpaswword
-        // login == email
-        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password === $checkPasword) {
-            $bMailPassword = true;
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password ===null || $name===null) {
+            throw new MissingDataToRegister();
         }
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -143,31 +141,29 @@ class UserController extends BaseController
         // PictureManagement
         $aProfilpic = $this->getFileMananger()->getFiles();
         $pic = $aProfilpic['profile-pic'] ?? null;
-        if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
-            throw new WrongTypeOfFile();
-        }
-        // Picture max weight => Redirect Error
-        if ($pic['size'] > 5000000) {
-            throw new PictureTooBig();
-        }
-
         // Path to files New Folder 
-         // Path to files New Folder 
-         $uploadDir = 'uploads/';
-         $destination = 'assets/media/img/default-profil-pic.png';
-         $picPath = null;
-         if ($pic !== null) {
-             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
-             $newFileName = uniqid() . '.' . $extension;
-             $destination = $uploadDir . $newFileName;                   
-             if (move_uploaded_file($pic['tmp_name'], $destination)!==null) {
-                 $picPath = $destination;
-             }
-             if ($picPath===null) {
-                 throw new Exception('Failed to upload file');
-             }
-             
-         }
+        $uploadDir = 'uploads/';
+        $destination = 'assets/media/img/default-profil-pic.png';
+        $picPath = null;
+        if ($pic['error'] === 0) {
+
+            $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
+            $newFileName = uniqid() . '.' . $extension;
+            $destination = $uploadDir . $newFileName;
+            if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
+                throw new WrongTypeOfFile();
+            }
+            // Picture max weight => Redirect Error
+            if ($pic['size'] > 5000000) {
+                throw new PictureTooBig();
+            }
+            if (move_uploaded_file($pic['tmp_name'], $destination) !== null) {
+                $picPath = $destination;
+            }
+            if ($picPath === null) {
+                throw new Exception('Failed to upload file');
+            }
+        }
         $picPath = $destination;
 
         // Preparing Array to use BaseManager::create($obj, $param)
@@ -178,6 +174,15 @@ class UserController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
+
+        // Setting Default Role User
+        $user= $this->UserManager->getByMail($login);
+        $roleSet = $this->UserManager->addNewRole($user->getId());
+
+        $confirmationMessage = 'Votre compte a été créé avec succès! Vous pouvez vous connecter';
+        $this->session->set("confirmationMessage", $confirmationMessage);
+
+
         // Redirect Profile Page.
         $this->redirect('');
     }
@@ -202,47 +207,47 @@ class UserController extends BaseController
 
     public function UserUpdate($login, $password, $checkPasword, $name, $lastName, $catchPhrase)
     {
-        if (filter_var($login, FILTER_VALIDATE_EMAIL) && $password === $checkPasword) {
-            $bMailPassword = true;
+        // Checking data integrity
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password ===null || $name===null) {
+            throw new MissingDataToRegister();
         }
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // PictureManagement
         $aProfilpic = $this->getFileMananger()->getFiles();
-        $aProfilpic = null;
-        $pic = $aProfilpic['profil-pic'] ?? null;
-
-        //Picture type verification
-        if ($pic !== null && $pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
-            throw new WrongTypeOfFile();
-        }
-        // Picture max weight => Redirect Error.
-        if ($pic !== null && $pic['size'] > 5000000) {
-            throw new PictureTooBig();
-        }
-
+        $pic = $aProfilpic['profile-pic'] ?? null;
         // Path to files New Folder 
         $uploadDir = 'uploads/';
         $destination = 'assets/media/img/default-profil-pic.png';
-        if ($pic !== null) {
+        $picPath = null;
+        if ($pic['error'] === 0) {
+
             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
             $newFileName = uniqid() . '.' . $extension;
             $destination = $uploadDir . $newFileName;
-
-            if (move_uploaded_file($pic['tmp_name'], $destination)) {
+            // Picture max weight => Redirect Error
+            if ($pic['type'] != 'image/png' && $pic['type'] != 'image/jpeg') {
+                throw new WrongTypeOfFile();
+            }
+            // Picture max weight => Redirect Error
+            if ($pic['size'] > 5000000) {
+                throw new PictureTooBig();
+            }
+            if (move_uploaded_file($pic['tmp_name'], $destination) !== null) {
                 $picPath = $destination;
             }
-            if (!move_uploaded_file($pic['tmp_name'], $destination)) {
+            if ($picPath === null) {
                 throw new Exception('Failed to upload file');
-            }
-            //Deleting old image
-            $oldpic = $this->session->get('user')->getPic();
-            if(file_exists($oldpic )){
-                unlink($oldpic );
             }
         }
         $picPath = $destination;
+
+        //Deleting old image
+        $oldpic = $this->session->get('user')->getPic();
+        if (file_exists($oldpic)) {
+            unlink($oldpic);
+        }
 
         // Preparing Array to use BaseManager::update($obj, $param)
         $user = new User();
@@ -252,7 +257,7 @@ class UserController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
-         // Redirect Profile Page.
-         $this->redirect('/Profil');
+        // Redirect Profile Page.
+        $this->redirect('/Profil');
     }
 }
