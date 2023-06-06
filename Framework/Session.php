@@ -57,4 +57,14 @@ class Session
     {
         session_destroy();
     }
+
+    /**
+     * Start session.
+     *
+     * @return void
+     */
+    public static function start()
+    {
+        session_start();
+    }
 }

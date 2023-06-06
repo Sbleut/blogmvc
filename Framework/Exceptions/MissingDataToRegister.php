@@ -4,7 +4,7 @@
 /**
  * Exception thrown when a controller is not found.
  */
-class MissingDataToRegisterException extends Exception
+class MissingDataToRegister extends Exception
 {
     /**
      * Constructor method.

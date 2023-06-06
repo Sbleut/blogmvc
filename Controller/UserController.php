@@ -130,7 +130,7 @@ class UserController extends BaseController
         //Check if we can user an object as a parameter 
 
         // Checking User Form
-        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password ===null || $name===null) {
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password === null || $name === null) {
             throw new MissingDataToRegister();
         }
         // Hash the password
@@ -145,7 +145,7 @@ class UserController extends BaseController
         $uploadDir = 'uploads/';
         $destination = 'assets/media/img/default-profil-pic.png';
         $picPath = null;
-        if ($pic['error'] === 0) {
+        if ($pic !== null) {
 
             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
             $newFileName = uniqid() . '.' . $extension;
@@ -176,7 +176,7 @@ class UserController extends BaseController
         }
 
         // Setting Default Role User
-        $user= $this->UserManager->getByMail($login);
+        $user = $this->UserManager->getByMail($login);
         $roleSet = $this->UserManager->addNewRole($user->getId());
 
         $confirmationMessage = 'Votre compte a été créé avec succès! Vous pouvez vous connecter';
@@ -208,7 +208,7 @@ class UserController extends BaseController
     public function UserUpdate($login, $password, $checkPasword, $name, $lastName, $catchPhrase)
     {
         // Checking data integrity
-        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password ===null || $name===null) {
+        if (!filter_var($login, FILTER_VALIDATE_EMAIL) || $password !== $checkPasword || $password === null || $name === null) {
             throw new MissingDataToRegister();
         }
         // Hash the password
@@ -221,8 +221,7 @@ class UserController extends BaseController
         $uploadDir = 'uploads/';
         $destination = 'assets/media/img/default-profil-pic.png';
         $picPath = null;
-        if ($pic['error'] === 0) {
-
+        if ($pic !== null) {
             $extension = pathinfo($pic['name'], PATHINFO_EXTENSION);
             $newFileName = uniqid() . '.' . $extension;
             $destination = $uploadDir . $newFileName;
@@ -240,15 +239,13 @@ class UserController extends BaseController
             if ($picPath === null) {
                 throw new Exception('Failed to upload file');
             }
+            //Deleting old image
+            $oldpic = $this->session->get('user')->getPic();
+            if (file_exists($oldpic)) {
+                unlink($oldpic);
+            }
         }
         $picPath = $destination;
-
-        //Deleting old image
-        $oldpic = $this->session->get('user')->getPic();
-        if (file_exists($oldpic)) {
-            unlink($oldpic);
-        }
-
         // Preparing Array to use BaseManager::update($obj, $param)
         $user = new User();
         $id = $this->session->get('user')->getId();
@@ -257,6 +254,13 @@ class UserController extends BaseController
         if (!$result) {
             throw new BDDCreationException();
         }
+        $this->session->destroy();
+        $this->session->start();
+        foreach ($this->UserManager->getRole($user->getId()) as $role) {
+            $listRole[] = $role['name'];
+        }
+        $user->setListRole($listRole);
+        $this->session->set('user', $user);
         // Redirect Profile Page.
         $this->redirect('/Profil');
     }
